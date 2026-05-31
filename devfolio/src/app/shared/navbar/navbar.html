@@ -1,0 +1,33 @@
+<nav>
+  <div class="nav-brand">
+    <a routerLink="/accueil">DevFolio</a>
+  </div>
+
+  <ul class="nav-links">
+    <li>
+      <a routerLink="/accueil" routerLinkActive="actif">Accueil</a>
+    </li>
+    <li>
+      <a routerLink="/projets" routerLinkActive="actif">Projets</a>
+    </li>
+    <li>
+      <a routerLink="/competences" routerLinkActive="actif">Compétences</a>
+    </li>
+    <li>
+      <a routerLink="/contact" routerLinkActive="actif">Contact</a>
+    </li>
+
+    @if (auth.estConnecte()) {
+      <li>
+        <a routerLink="/admin/projets" routerLinkActive="actif">Admin</a>
+      </li>
+      <li>
+        <button (click)="auth.deconnecter()">Déconnexion</button>
+      </li>
+    } @else {
+      <li>
+        <a routerLink="/login" routerLinkActive="actif">Login</a>
+      </li>
+    }
+  </ul>
+</nav>
