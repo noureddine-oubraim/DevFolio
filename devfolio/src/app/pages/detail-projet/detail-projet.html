@@ -1,1 +1,82 @@
-<p>detail-projet works!</p>
+<!-- detail-projet.html -->
+<main class="detail-page">
+  <div class="container">
+    <a routerLink="/projets" class="back-link">
+      Retour aux projets
+    </a>
+
+    @if (projet) {
+      <div class="detail-layout">
+        <div class="detail-main">
+          <div class="detail-header">
+            <div class="projet-icon-lg">{{ projet.titre[0] }}</div>
+            <div>
+              <h1 class="detail-titre">{{ projet.titre }}</h1>
+              <span class="tag statut-{{ projet.statut }}">{{ projet.statut }}</span>
+            </div>
+          </div>
+
+          <p class="detail-desc">{{ projet.description }}</p>
+
+          <div class="detail-section">
+            <h2 class="detail-section-title">Technologies utilisees</h2>
+            <div class="tech-list">
+              @for (tech of projet.technologies; track tech) {
+                <div class="tech-badge">
+                  <span class="tech-dot"></span>
+                  {{ tech }}
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <h2 class="detail-section-title">A propos de ce projet</h2>
+            <p class="detail-body">
+              Ce projet a ete realise avec {{ projet.technologies.join(', ') }}.
+              Il montre les concepts Angular vus en cours : composants, services,
+              routing et reactive forms.
+            </p>
+          </div>
+        </div>
+
+        <aside class="detail-sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Informations</h3>
+
+            <div class="info-row">
+              <span class="info-label">Statut</span>
+              <span class="tag statut-{{ projet.statut }}">{{ projet.statut }}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Date</span>
+              <span class="info-val">{{ projet.dateCreation | date:'dd MMMM yyyy' }}</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Stack</span>
+              <span class="info-val">{{ projet.technologies.length }} technologie{{ projet.technologies.length > 1 ? 's' : '' }}</span>
+            </div>
+
+            <div class="sidebar-actions">
+              @if (projet.githubUrl) {
+                <a [href]="projet.githubUrl" target="_blank" class="btn btn-primary" style="width:100%; justify-content:center;">
+                  Voir sur GitHub
+                </a>
+              }
+              <a routerLink="/projets" class="btn btn-outline" style="width:100%; justify-content:center;">
+                Retour
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    } @else {
+      <div class="not-found">
+        <p class="not-found-icon">?</p>
+        <h2>Projet introuvable</h2>
+        <p>Ce projet n'existe pas ou a ete supprime.</p>
+        <a routerLink="/projets" class="btn btn-primary">Voir tous les projets</a>
+      </div>
+    }
+  </div>
+</main>

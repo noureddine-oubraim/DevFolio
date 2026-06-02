@@ -1,1 +1,60 @@
-<p>projets works!</p>
+<!-- projets.html -->
+<main class="projets-page">
+  <div class="container">
+    <div class="page-header">
+      <p class="section-eyebrow">Portfolio</p>
+      <h1 class="section-title">Mes projets</h1>
+      <p class="section-sub">{{ projetsFiltres.length }} projet{{ projetsFiltres.length > 1 ? 's' : '' }} au total</p>
+    </div>
+
+    <div class="filtres">
+      <button class="filtre-btn" [class.actif]="filtreActif === 'tous'" (click)="filtrer('tous')">Tous</button>
+
+      @for (tech of technologies; track tech) {
+        <button class="filtre-btn" [class.actif]="filtreActif === tech" (click)="filtrer(tech)">{{ tech }}</button>
+      }
+    </div>
+
+    <div class="projets-grid">
+      @for (projet of projetsFiltres; track projet.id) {
+        <article class="projet-card">
+          <div class="card-top">
+            <div class="projet-icon">{{ projet.titre[0] }}</div>
+            <div class="card-meta">
+              <span class="tag statut-{{ projet.statut }}">{{ projet.statut }}</span>
+              <span class="card-date">{{ projet.dateCreation | date:'MMM yyyy' }}</span>
+            </div>
+          </div>
+
+          <h2 class="projet-titre">{{ projet.titre }}</h2>
+          <p class="projet-desc">{{ projet.description }}</p>
+
+          <div class="projet-techs">
+            @for (tech of projet.technologies; track tech) {
+              <span class="tag">{{ tech }}</span>
+            }
+          </div>
+
+          <div class="card-actions">
+            <a [routerLink]="['/projets', projet.id]" class="btn btn-primary btn-sm">
+              Voir les details
+            </a>
+            @if (projet.githubUrl) {
+              <a [href]="projet.githubUrl" target="_blank" class="btn btn-outline btn-sm">
+                GitHub
+              </a>
+            }
+          </div>
+        </article>
+      }
+    </div>
+
+    @if (projetsFiltres.length === 0) {
+      <div class="empty-state">
+        <p class="empty-icon">?</p>
+        <p class="empty-text">Aucun projet pour cette technologie</p>
+        <button class="btn btn-outline" (click)="filtrer('tous')">Voir tous les projets</button>
+      </div>
+    }
+  </div>
+</main>

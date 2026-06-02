@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-competences',
   imports: [],
   templateUrl: './competences.html',
-  styleUrl: './competences.css',
+  styleUrls: ['./competences.css'],
 })
 export class Competences {}

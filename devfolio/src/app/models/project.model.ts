@@ -13,4 +13,5 @@ export interface Competence {
   nom: string;
   categorie: 'frontend' | 'backend' | 'outils';
   niveau: number;
+  pourcentage?: number;
 }

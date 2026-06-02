@@ -1,1 +1,106 @@
-<p>accueil works!</p>
+<!-- accueil.html -->
+<main class="accueil">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="grid-lines"></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        Disponible pour un stage ou un projet
+      </div>
+
+      <h1 class="hero-title">
+        Bonjour, je suis<br>
+        <span class="hero-name">{{ nom }}</span>
+      </h1>
+
+      <p class="hero-subtitle">{{ titre }}</p>
+
+      <div class="hero-actions">
+        <a routerLink="/projets" class="btn btn-primary">Voir mes projets</a>
+        <a routerLink="/contact" class="btn btn-outline">Me contacter</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat" *ngFor="let s of stats">
+          <span class="stat-val">{{ s.valeur }}</span>
+          <span class="stat-label">{{ s.label }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Projets recents -->
+  <section class="section projets-section">
+    <div class="container">
+      <p class="section-eyebrow">Portfolio</p>
+      <h2 class="section-title">Projets recents</h2>
+      <p class="section-sub">Une selection de mes dernieres realisations</p>
+
+      <div class="projets-grid">
+        @for (projet of projetsRecents; track projet.id) {
+          <div class="projet-card">
+            <div class="projet-card-header">
+              <div class="projet-icon">{{ projet.titre[0] }}</div>
+              <span class="tag">{{ projet.statut }}</span>
+            </div>
+            <h3 class="projet-titre">{{ projet.titre }}</h3>
+            <p class="projet-desc">{{ projet.description }}</p>
+            <div class="projet-techs">
+              @for (tech of projet.technologies; track tech) {
+                <span class="tag">{{ tech }}</span>
+              }
+            </div>
+            <a [routerLink]="['/projets', projet.id]" class="projet-link">
+              Voir le projet <span aria-hidden="true">-&gt;</span>
+            </a>
+          </div>
+        }
+      </div>
+
+      <div class="section-cta">
+        <a routerLink="/projets" class="btn btn-outline">Tous les projets -&gt;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- A propos rapide -->
+  <section class="section apropos-section">
+    <div class="container apropos-grid">
+      <div class="apropos-text">
+        <p class="section-eyebrow">A propos</p>
+        <h2 class="section-title">Developpeur passionne</h2>
+        <p class="apropos-desc">
+          Etudiante en developpement web a Casablanca, je realise des applications Angular
+          simples et organisees : pages, composants, services, formulaires et navigation.
+          Ce portfolio presente mes travaux pratiques et mes projets personnels.
+        </p>
+        <a routerLink="/competences" class="btn btn-outline">Mes competences -&gt;</a>
+      </div>
+
+      <div class="apropos-card">
+        <div class="apropos-avatar">
+          <div class="avatar-ring"></div>
+          <div class="avatar-inner">{{ initiales }}</div>
+        </div>
+        <div class="apropos-info">
+          <p class="apropos-name">{{ nom }}</p>
+          <p class="apropos-role">{{ titre }}</p>
+          <p class="apropos-loc">Casablanca, Maroc</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>

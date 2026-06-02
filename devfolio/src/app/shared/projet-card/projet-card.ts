@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-projet-card',
   imports: [],
   templateUrl: './projet-card.html',
-  styleUrl: './projet-card.css',
+  styleUrls: ['./projet-card.css'],
 })
 export class ProjetCard {}

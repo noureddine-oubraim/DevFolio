@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-admin-projets',
   imports: [],
   templateUrl: './admin-projets.html',
-  styleUrl: './admin-projets.css',
+  styleUrls: ['./admin-projets.css'],
 })
 export class AdminProjets {}

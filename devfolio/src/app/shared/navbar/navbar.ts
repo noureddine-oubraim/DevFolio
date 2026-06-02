@@ -6,7 +6,7 @@ import { Auth } from '../../services/auth';
   selector: 'app-navbar',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  styleUrls: ['./navbar.css'],
 })
 export class Navbar {
   constructor(public auth: Auth) {}
