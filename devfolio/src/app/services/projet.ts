@@ -10,7 +10,7 @@ export class ProjetService {
       titre: 'DevFolio',
       description: 'Portfolio personnel avec pages, routing, formulaire de contact et espace admin.',
       technologies: ['Angular', 'TypeScript', 'Reactive Forms'],
-      githubUrl: 'https://github.com/sana-bennour/devfolio',
+      githubUrl: 'https://github.com/devfolio/devfolio',
       statut: 'publie',
       dateCreation: new Date('2026-05-20')
     },
@@ -19,7 +19,7 @@ export class ProjetService {
       titre: 'Gestion Contacts',
       description: 'Application de gestion des contacts avec composants, service et formulaire.',
       technologies: ['Angular', 'Forms'],
-      githubUrl: 'https://github.com/sana-bennour/gestion-contacts',
+      githubUrl: 'https://github.com/devfolio/gestion-contacts',
       statut: 'publie',
       dateCreation: new Date('2026-04-12')
     },
@@ -28,7 +28,7 @@ export class ProjetService {
       titre: 'Catalogue App',
       description: 'Catalogue simple avec liste, detail, navigation et zone admin protegee.',
       technologies: ['Angular', 'Routing', 'Guards'],
-      githubUrl: 'https://github.com/sana-bennour/catalogue-app',
+      githubUrl: 'https://github.com/devfolio/catalogue-app',
       statut: 'publie',
       dateCreation: new Date('2026-03-28')
     },
@@ -37,7 +37,7 @@ export class ProjetService {
       titre: 'Contact Manager',
       description: 'Mini application CRUD pour ajouter, modifier et supprimer des donnees.',
       technologies: ['Angular', 'Services'],
-      githubUrl: 'https://github.com/sana-bennour/contact-manager',
+      githubUrl: 'https://github.com/devfolio/contact-manager',
       statut: 'brouillon',
       dateCreation: new Date('2026-02-18')
     }

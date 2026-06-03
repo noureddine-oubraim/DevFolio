@@ -4,7 +4,7 @@ export interface Projet {
   description: string;
   technologies: string[];
   githubUrl: string;
-  statut: 'publié' | 'brouillon' | 'privé';
+  statut: 'publie' | 'brouillon' | 'prive';
   dateCreation: Date;
 }
 
