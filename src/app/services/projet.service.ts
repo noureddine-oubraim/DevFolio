@@ -6,7 +6,7 @@ import { initialProjects } from '../data/mock-db';
   providedIn: 'root'
 })
 export class ProjetService {
-  private readonly STORAGE_KEY = 'devfolio_projects_v2';
+  private readonly STORAGE_KEY = 'devfolio_projects_v3';
   
   // State signal holding all projects
   private projects = signal<Projet[]>(this.loadProjects());

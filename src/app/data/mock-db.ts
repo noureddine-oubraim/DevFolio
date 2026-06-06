@@ -72,6 +72,15 @@ export const initialProjects: Projet[] = [
     statut: 'Publié',
     github: 'https://github.com/noureddineoubraim1-cmyk/sysmonitor',
     date: '2025-05-20'
+  },
+  {
+    id: 9,
+    titre: 'E-Learning Platform',
+    description: 'Plateforme d\'apprentissage en ligne avec streaming vidéo, quiz interactifs et système de progression. Intégration de paiements Stripe et gestion des certificats automatisée.',
+    technologies: ['Angular', 'Node.js', 'Express', 'MongoDB'],
+    statut: 'Brouillon',
+    github: 'https://github.com/noureddineoubraim1-cmyk/elearning',
+    date: '2026-05-01'
   }
 ];
 
@@ -165,6 +174,18 @@ export const initialSkills: Competence[] = [
     nom: 'Docker',
     niveau: 'Débutant',
     icone: 'fa-brands fa-docker'
+  },
+  {
+    id: 16,
+    nom: 'Spring Boot',
+    niveau: 'Intermédiaire',
+    icone: 'fa-solid fa-leaf'
+  },
+  {
+    id: 17,
+    nom: 'MongoDB',
+    niveau: 'Intermédiaire',
+    icone: 'fa-solid fa-leaf'
   }
 ];
 
@@ -200,6 +221,14 @@ export const initialExperiences: Experience[] = [
     description: 'Conception et développement d\'une plateforme web de suivi de projet agile avec intégration d\'API tiers. Automatisation de rapports d\'activité hebdomadaires et mise en place d\'un CI/CD basique.',
     dateDebut: '2024-06-01',
     dateFin: '2024-08-31'
+  },
+  {
+    id: 5,
+    titre: 'Développeur Frontend Junior',
+    entreprise: 'StartUp Innov – Rabat, Maroc',
+    description: 'Développement de composants UI réutilisables en React pour une application SaaS de gestion RH. Collaboration avec l\'équipe UX/UI pour améliorer l\'accessibilité de la plateforme.',
+    dateDebut: '2023-09-01',
+    dateFin: '2024-05-31'
   }
 ];
 
@@ -235,14 +264,14 @@ export const initialMessages: Message[] = [
 
 // Seed local storage if empty (v2 keys to force refresh)
 export function seedLocalStorage() {
-  if (!localStorage.getItem('devfolio_projects_v2')) {
-    localStorage.setItem('devfolio_projects_v2', JSON.stringify(initialProjects));
+  if (!localStorage.getItem('devfolio_projects_v3')) {
+    localStorage.setItem('devfolio_projects_v3', JSON.stringify(initialProjects));
   }
-  if (!localStorage.getItem('devfolio_skills_v2')) {
-    localStorage.setItem('devfolio_skills_v2', JSON.stringify(initialSkills));
+  if (!localStorage.getItem('devfolio_skills_v3')) {
+    localStorage.setItem('devfolio_skills_v3', JSON.stringify(initialSkills));
   }
-  if (!localStorage.getItem('devfolio_experiences_v2')) {
-    localStorage.setItem('devfolio_experiences_v2', JSON.stringify(initialExperiences));
+  if (!localStorage.getItem('devfolio_experiences_v3')) {
+    localStorage.setItem('devfolio_experiences_v3', JSON.stringify(initialExperiences));
   }
   if (!localStorage.getItem('devfolio_messages_v3')) {
     localStorage.setItem('devfolio_messages_v3', JSON.stringify(initialMessages));

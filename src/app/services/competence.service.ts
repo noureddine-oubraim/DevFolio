@@ -6,7 +6,7 @@ import { initialSkills } from '../data/mock-db';
   providedIn: 'root'
 })
 export class CompetenceService {
-  private readonly STORAGE_KEY = 'devfolio_skills_v2';
+  private readonly STORAGE_KEY = 'devfolio_skills_v3';
   
   // State signal holding all skills
   private skills = signal<Competence[]>(this.loadSkills());
