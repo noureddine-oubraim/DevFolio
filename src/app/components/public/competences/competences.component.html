@@ -1,0 +1,130 @@
+    <div class="competences-page">
+      <!-- Page Hero -->
+      <div class="page-hero">
+        <div class="container">
+          <div class="breadcrumb">
+            <a routerLink="/accueil">Accueil</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span>Compétences</span>
+          </div>
+          <h1>Mes <span class="accent">Compétences</span></h1>
+          <p class="hero-sub">Un aperçu complet de mon arsenal technique, forgé à travers des projets réels et une formation continue.</p>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-bar">
+        <div class="container filter-inner">
+          @for (cat of categories; track cat.key) {
+            <button class="filter-btn" [class.active]="activeCategory() === cat.key"
+                    (click)="activeCategory.set(cat.key)">
+              <i [ngClass]="cat.icon"></i> {{ cat.label }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Skills Grid -->
+      <div class="container skills-container">
+        <div class="skills-grid">
+          @for (skill of filteredSkills(); track skill.id) {
+            <div class="skill-card card" [attr.data-level]="skill.niveau">
+              <div class="card-top">
+                <div class="skill-icon" [ngClass]="'lvl-' + (skill.niveau | lowercase | slice:0:3)">
+                  <i [ngClass]="skill.icone || 'fa-solid fa-code'"></i>
+                </div>
+                <span class="level-badge" [ngClass]="'badge-' + (skill.niveau | lowercase | slice:0:3)">
+                  {{ skill.niveau }}
+                </span>
+              </div>
+              <h3>{{ skill.nom }}</h3>
+              <div class="progress-track">
+                <div class="progress-fill" [ngClass]="'fill-' + (skill.niveau | lowercase | slice:0:3)"></div>
+              </div>
+              <span class="percent-label">
+                @if (skill.niveau === 'Avancé') { 90% }
+                @else if (skill.niveau === 'Intermédiaire') { 60% }
+                @else { 30% }
+              </span>
+            </div>
+          } @empty {
+            <div class="empty-state">
+              <i class="fa-solid fa-filter-circle-xmark"></i>
+              <p>Aucune compétence dans cette catégorie.</p>
+            </div>
+          }
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row">
+          <div class="stat-card card">
+            <div class="stat-number accent">{{ advancedCount() }}</div>
+            <div class="stat-label">Compétences Avancées</div>
+          </div>
+          <div class="stat-card card">
+            <div class="stat-number accent">{{ intermediateCount() }}</div>
+            <div class="stat-label">Niveau Intermédiaire</div>
+          </div>
+          <div class="stat-card card">
+            <div class="stat-number accent">{{ beginnerCount() }}</div>
+            <div class="stat-label">En Apprentissage</div>
+          </div>
+          <div class="stat-card card">
+            <div class="stat-number accent">{{ totalSkills() }}</div>
+            <div class="stat-label">Total Compétences</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra Sections -->
+      <div class="extra-section">
+        <div class="container">
+          <div class="extras-grid">
+            <!-- Méthodes & Outils -->
+            <div class="extra-card card" style="grid-column: 1 / -1; margin-bottom: 0.5rem;">
+              <h3><i class="fa-solid fa-screwdriver-wrench"></i> Méthodes & Outils</h3>
+              <p style="color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem;">
+                <strong>Gestion de projet Agile</strong> – Utilisation de Jira pour le suivi des sprints, la gestion des tâches et le travail collaboratif au sein d’une équipe de développement.
+              </p>
+            </div>
+            
+            <!-- Qualités -->
+            <div class="extra-card card">
+              <h3><i class="fa-solid fa-star"></i> Qualités Personnelles</h3>
+              <div class="tags-wrap">
+                @for (q of softSkills; track q) {
+                  <span class="extra-tag">{{ q }}</span>
+                }
+              </div>
+            </div>
+            <!-- Langues -->
+            <div class="extra-card card">
+              <h3><i class="fa-solid fa-language"></i> Langues</h3>
+              <div class="lang-list">
+                @for (lang of languages; track lang.name) {
+                  <div class="lang-item">
+                    <span class="lang-flag">{{ lang.flag }}</span>
+                    <div class="lang-info">
+                      <span class="lang-name">{{ lang.name }}</span>
+                      <span class="lang-lvl">{{ lang.level }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+            <!-- Centres d'intérêt -->
+            <div class="extra-card card">
+              <h3><i class="fa-solid fa-heart"></i> Centres d'Intérêt</h3>
+              <div class="interests-grid">
+                @for (interest of interests; track interest.label) {
+                  <div class="interest-item">
+                    <i [ngClass]="interest.icon"></i>
+                    <span>{{ interest.label }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,69 @@
+    <div class="admin-container">
+      <aside class="admin-sidebar">
+        <div class="sidebar-header">
+          <a routerLink="/" class="logo">
+            Noureddine<span class="logo-dot">.admin</span>
+          </a>
+        </div>
+        
+        <nav class="sidebar-nav">
+          <ul>
+            <li>
+              <a routerLink="/admin/dashboard" routerLinkActive="active">
+                <i class="fa-solid fa-gauge"></i> Tableau de Bord
+              </a>
+            </li>
+            <li>
+              <a routerLink="/admin/projets" routerLinkActive="active">
+                <i class="fa-solid fa-diagram-project"></i> Mes Projets
+              </a>
+            </li>
+            <li>
+              <a routerLink="/admin/competences" routerLinkActive="active">
+                <i class="fa-solid fa-code-fork"></i> Mes Compétences
+              </a>
+            </li>
+            <li>
+              <a routerLink="/admin/experiences" routerLinkActive="active">
+                <i class="fa-solid fa-briefcase"></i> Mes Expériences
+              </a>
+            </li>
+            <li>
+              <a routerLink="/admin/messages" routerLinkActive="active">
+                <i class="fa-solid fa-inbox"></i> Boîte de Réception
+              </a>
+            </li>
+          </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+          <button class="logout-btn" (click)="logout()">
+            <i class="fa-solid fa-power-off"></i> Fermer Session
+          </button>
+        </div>
+      </aside>
+      
+      <main class="admin-main">
+        <header class="admin-header">
+          <div class="header-left">
+            <!-- Breadcrumbs or page title could go here -->
+          </div>
+          <div class="header-right">
+            <a routerLink="/accueil" class="btn btn-outline" style="margin-right: 1rem;" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Voir le site
+            </a>
+            <button class="theme-toggle" (click)="themeService.toggleTheme()" aria-label="Toggle theme">
+              @if (themeService.isDarkMode()) {
+                <i class="fa-solid fa-sun"></i>
+              } @else {
+                <i class="fa-solid fa-moon"></i>
+              }
+            </button>
+          </div>
+        </header>
+        
+        <div class="admin-content">
+          <router-outlet></router-outlet>
+        </div>
+      </main>
+    </div>

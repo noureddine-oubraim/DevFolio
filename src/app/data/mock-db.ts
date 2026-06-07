@@ -262,18 +262,3 @@ export const initialMessages: Message[] = [
   }
 ];
 
-// Seed local storage if empty (v2 keys to force refresh)
-export function seedLocalStorage() {
-  if (!localStorage.getItem('devfolio_projects_v3')) {
-    localStorage.setItem('devfolio_projects_v3', JSON.stringify(initialProjects));
-  }
-  if (!localStorage.getItem('devfolio_skills_v3')) {
-    localStorage.setItem('devfolio_skills_v3', JSON.stringify(initialSkills));
-  }
-  if (!localStorage.getItem('devfolio_experiences_v3')) {
-    localStorage.setItem('devfolio_experiences_v3', JSON.stringify(initialExperiences));
-  }
-  if (!localStorage.getItem('devfolio_messages_v3')) {
-    localStorage.setItem('devfolio_messages_v3', JSON.stringify(initialMessages));
-  }
-}

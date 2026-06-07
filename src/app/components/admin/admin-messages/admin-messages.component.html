@@ -1,0 +1,87 @@
+    <div class="inbox-container">
+      <div class="inbox-header">
+        <div>
+          <h1>Inbox & Clients</h1>
+          <p>Consultez les messages reçus via le formulaire de contact.</p>
+        </div>
+        <div class="badge-count">
+          {{ messages().length }} message(s)
+        </div>
+      </div>
+
+      <div class="inbox-layout">
+        <!-- Messages List -->
+        <div class="messages-list card">
+          @if (messages().length === 0) {
+            <div class="empty-inbox">
+              <i class="fa-regular fa-envelope-open"></i>
+              <p>Aucun message reçu pour le moment.</p>
+            </div>
+          } @else {
+            <div class="list-wrapper">
+              @for (msg of messages(); track msg.id) {
+                <div class="msg-item" 
+                     [class.active]="selectedMessage()?.id === msg.id"
+                     (click)="selectMessage(msg)">
+                  <div class="msg-meta">
+                    <span class="msg-sender">{{ msg.nom }}</span>
+                    <span class="msg-date">{{ msg.date }}</span>
+                  </div>
+                  <div class="msg-subject">{{ msg.sujet }}</div>
+                  <div class="msg-excerpt">{{ msg.message | truncate:60 }}</div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Message Detail Panel -->
+        <div class="message-view card">
+          @if (selectedMessage()) {
+            <div class="view-header">
+              <div>
+                <h2>{{ selectedMessage()?.sujet }}</h2>
+                <div class="sender-info">
+                  <strong>De:</strong> {{ selectedMessage()?.nom }} 
+                  <span class="sender-email">&lt;{{ selectedMessage()?.email }}&gt;</span>
+                </div>
+                <div class="msg-timestamp"><i class="fa-regular fa-clock"></i> {{ selectedMessage()?.date }}</div>
+              </div>
+              <div>
+                <button class="btn btn-danger-outline" (click)="confirmDelete(selectedMessage()!.id)">
+                  <i class="fa-regular fa-trash-can"></i> Supprimer
+                </button>
+              </div>
+            </div>
+            <div class="view-body">
+              <p>{{ selectedMessage()?.message }}</p>
+              @if (selectedMessage()?.reponse) {
+                <div class="response-block" style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary); border-radius: 0.5rem;">
+                  <h4 style="margin-top: 0; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-primary);"><i class="fa-solid fa-reply"></i> Ma Réponse</h4>
+                  <p style="margin: 0; font-style: italic;">{{ selectedMessage()?.reponse }}</p>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="empty-view">
+              <i class="fa-solid fa-arrow-left"></i>
+              <p>Sélectionnez un message dans la liste pour afficher son contenu.</p>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Confirmation Modal (RM5) -->
+      @if (showDeleteModal()) {
+        <div class="modal-overlay">
+          <div class="modal-card card">
+            <h3><i class="fa-solid fa-triangle-exclamation modal-warning-icon"></i> Confirmer la suppression</h3>
+            <p>Êtes-vous sûr de vouloir supprimer définitivement ce message ? Cette action est irréversible.</p>
+            <div class="modal-actions">
+              <button class="btn btn-outline" (click)="cancelDelete()">Annuler</button>
+              <button class="btn btn-danger" (click)="deleteConfirmed()">Supprimer</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>

@@ -1,0 +1,43 @@
+    <div class="container page-container">
+      <div class="page-header">
+        <h1>All Projects</h1>
+        <p>A collection of my recent work, side projects, and experiments.</p>
+      </div>
+      <div class="filter-bar card">
+        <div class="input-group" style="margin-bottom: 0;">
+          <label for="techFilter">Filter by Technology:</label>
+          <select id="techFilter" class="input-control"
+                  [value]="selectedTech()"
+                  (change)="selectedTech.set($any($event.target).value)">
+            <option value="">All Technologies</option>
+            @for (tech of projetService.getAllTechnologies(); track tech) {
+              <option [value]="tech">{{ tech }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="projects-grid">
+        @for (project of filteredProjects(); track project.id) {
+          <div class="card project-card" appHighlight>
+            <div class="project-tags">
+              @for (tech of project.technologies; track tech) {
+                <span class="tech-tag" [class.active-tag]="tech === selectedTech()">{{ tech }}</span>
+              }
+            </div>
+            <h3>{{ project.titre }}</h3>
+            <p class="project-desc">{{ project.description | truncate:120 }}</p>
+            <a [routerLink]="['/projet', project.id]" class="project-link">
+              View Details <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        } @empty {
+          <div class="empty-state">
+            <i class="fa-regular fa-folder-open"></i>
+            <h3>No projects found</h3>
+            <p>Try adjusting your filter to see more projects.</p>
+            <button class="btn btn-outline" (click)="selectedTech.set('')">Clear Filter</button>
+          </div>
+        }
+      </div>
+    </div>

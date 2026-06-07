@@ -19,9 +19,8 @@ export class ExperienceService {
   private loadExperiences(): Experience[] {
     const data = localStorage.getItem(this.STORAGE_KEY);
     if (data) {
-      return JSON.parse(data);
+      try { return JSON.parse(data); } catch { /* corrupted — fall through */ }
     }
-    // Fallback to mock data if empty
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(initialExperiences));
     return initialExperiences;
   }

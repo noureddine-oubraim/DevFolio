@@ -1,0 +1,126 @@
+    <div class="admin-page">
+      <div class="page-header">
+        <div>
+          <h1>Gestion des Expériences</h1>
+          <p>Ajoutez, modifiez ou supprimez vos expériences professionnelles.</p>
+        </div>
+        <button class="btn btn-primary" (click)="openAddModal()">
+          <i class="fa-solid fa-plus"></i> Nouvelle Expérience
+        </button>
+      </div>
+
+      <div class="table-container card">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Poste / Titre</th>
+              <th>Entreprise</th>
+              <th>Période</th>
+              <th class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (exp of experiences(); track exp.id) {
+              <tr>
+                <td><strong>{{ exp.titre }}</strong></td>
+                <td>{{ exp.entreprise }}</td>
+                <td>{{ exp.dateDebut }} &mdash; {{ exp.dateFin }}</td>
+                <td class="text-right">
+                  <div class="action-buttons">
+                    <button class="btn-icon" (click)="openEditModal(exp)" title="Modifier">
+                      <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="btn-icon text-danger" (click)="confirmDelete(exp.id)" title="Supprimer">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="4" class="text-center py-4">Aucune expérience trouvée.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal Add/Edit -->
+      @if (showModal()) {
+        <div class="modal-overlay">
+          <div class="modal-card card">
+            <div class="modal-header">
+              <h2>{{ isEditing() ? 'Modifier l\\'expérience' : 'Nouvelle Expérience' }}</h2>
+              <button class="btn-icon" (click)="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <form [formGroup]="expForm" (ngSubmit)="onSubmit()">
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="titre">Titre du poste *</label>
+                  <input type="text" id="titre" formControlName="titre" class="input-control">
+                  @if (expForm.get('titre')?.invalid && expForm.get('titre')?.touched) {
+                    <div class="error-text">Le titre est requis.</div>
+                  }
+                </div>
+                <div class="input-group">
+                  <label for="entreprise">Entreprise *</label>
+                  <input type="text" id="entreprise" formControlName="entreprise" class="input-control">
+                  @if (expForm.get('entreprise')?.invalid && expForm.get('entreprise')?.touched) {
+                    <div class="error-text">L'entreprise est requise.</div>
+                  }
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="dateDebut">Date de début *</label>
+                  <input type="text" id="dateDebut" formControlName="dateDebut" class="input-control"
+                         placeholder="ex: 2024-06-01">
+                  @if (expForm.get('dateDebut')?.invalid && expForm.get('dateDebut')?.touched) {
+                    <div class="error-text">La date de début est requise.</div>
+                  }
+                </div>
+                <div class="input-group">
+                  <label for="dateFin">Date de fin *</label>
+                  <input type="text" id="dateFin" formControlName="dateFin" class="input-control"
+                         placeholder="ex: 2024-08-31 ou Présent">
+                  @if (expForm.get('dateFin')?.invalid && expForm.get('dateFin')?.touched) {
+                    <div class="error-text">La date de fin est requise.</div>
+                  }
+                </div>
+              </div>
+
+              <div class="input-group">
+                <label for="description">Description *</label>
+                <textarea id="description" formControlName="description" class="input-control" rows="4"></textarea>
+                @if (expForm.get('description')?.invalid && expForm.get('description')?.touched) {
+                  <div class="error-text">La description est requise.</div>
+                }
+              </div>
+
+              <div class="modal-actions">
+                <button type="button" class="btn btn-outline" (click)="closeModal()">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="expForm.invalid">
+                  {{ isEditing() ? 'Enregistrer' : 'Créer' }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      }
+
+      <!-- Confirmation Delete Modal -->
+      @if (showDeleteModal()) {
+        <div class="modal-overlay">
+          <div class="modal-card card" style="max-width: 400px; text-align: center;">
+            <h3 style="margin-bottom: 1rem; color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> Suppression</h3>
+            <p>Voulez-vous vraiment supprimer cette expérience ? Cette action est irréversible.</p>
+            <div class="modal-actions" style="justify-content: center; margin-top: 2rem;">
+              <button class="btn btn-outline" (click)="cancelDelete()">Annuler</button>
+              <button class="btn" style="background: #ef4444; color: white;" (click)="deleteConfirmed()">Supprimer</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>

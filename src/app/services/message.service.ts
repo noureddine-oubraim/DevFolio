@@ -6,7 +6,7 @@ import { initialMessages } from '../data/mock-db';
   providedIn: 'root'
 })
 export class MessageService {
-  private readonly STORAGE_KEY = 'devfolio_messages_v2';
+  private readonly STORAGE_KEY = 'devfolio_messages_v3';
   
   // State signal holding all messages
   private messages = signal<Message[]>(this.loadMessages());

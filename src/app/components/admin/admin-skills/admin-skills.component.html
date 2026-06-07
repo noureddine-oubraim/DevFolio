@@ -1,0 +1,114 @@
+    <div class="skills-admin-container">
+      <div class="admin-header-row">
+        <div>
+          <h1>Skills Engine</h1>
+          <p class="indicator-text">Gérez vos compétences techniques et niveaux d'expertise.</p>
+        </div>
+        <button class="btn btn-primary" (click)="openAddModal()">
+          <i class="fa-solid fa-plus"></i> Nouvelle compétence
+        </button>
+      </div>
+
+      <!-- Skills Table -->
+      <div class="table-container card">
+        @if (skills().length === 0) {
+          <div class="empty-table">
+            <i class="fa-solid fa-code"></i>
+            <p>Aucune compétence n'a été ajoutée pour le moment.</p>
+          </div>
+        } @else {
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Compétence</th>
+                <th>Niveau</th>
+                <th>Icône</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (skill of skills(); track skill.id) {
+                <tr>
+                  <td>
+                    <strong>{{ skill.nom }}</strong>
+                  </td>
+                  <td>
+                    <span class="level-badge" [ngClass]="skill.niveau | lowercase">
+                      {{ skill.niveau }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="skill-icon-preview">
+                      <i [ngClass]="skill.icone || 'fa-solid fa-code'"></i>
+                      <code class="icon-class">{{ skill.icone || 'fa-code' }}</code>
+                    </span>
+                  </td>
+                  <td class="actions-cell">
+                    <button class="action-btn edit-btn" (click)="openEditModal(skill)" title="Modifier">
+                      <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="action-btn delete-btn" (click)="confirmDelete(skill.id)" title="Supprimer">
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+      </div>
+
+      <!-- Form Modal -->
+      @if (showFormModal()) {
+        <div class="modal-overlay">
+          <div class="modal-card form-modal card">
+            <h2>{{ isEditing() ? 'Modifier la compétence' : 'Nouvelle Compétence' }}</h2>
+            <form [formGroup]="skillForm" (ngSubmit)="saveSkill()" novalidate>
+
+              <div class="input-group">
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" formControlName="nom" class="input-control" />
+                @if (skillForm.get('nom')?.invalid && skillForm.get('nom')?.touched) {
+                  <div class="error-text">Le nom est requis.</div>
+                }
+              </div>
+
+              <div class="input-group">
+                <label for="niveau">Niveau *</label>
+                <select id="niveau" formControlName="niveau" class="input-control">
+                  <option value="Débutant">Débutant</option>
+                  <option value="Intermédiaire">Intermédiaire</option>
+                  <option value="Avancé">Avancé</option>
+                </select>
+              </div>
+
+              <div class="input-group">
+                <label for="icone">Classe Icône FontAwesome</label>
+                <input type="text" id="icone" formControlName="icone" class="input-control"
+                       placeholder="Ex: fa-brands fa-angular" />
+                <span class="input-tip">Visitez fontawesome.com pour trouver les classes CSS d'icônes.</span>
+              </div>
+
+              <div class="modal-actions">
+                <button type="button" class="btn btn-outline" (click)="closeFormModal()">Annuler</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      }
+
+      <!-- Delete Confirmation Modal (RM5) -->
+      @if (showDeleteModal()) {
+        <div class="modal-overlay">
+          <div class="modal-card confirmation-modal card">
+            <h3><i class="fa-solid fa-triangle-exclamation modal-warning-icon"></i> Confirmer la suppression</h3>
+            <p>Êtes-vous sûr de vouloir supprimer définitivement cette compétence ? Cette action est irréversible.</p>
+            <div class="modal-actions">
+              <button class="btn btn-outline" (click)="cancelDelete()">Annuler</button>
+              <button class="btn btn-danger" (click)="deleteConfirmed()">Supprimer</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>

@@ -1,0 +1,73 @@
+    .page-container {
+      padding: 4rem 1.5rem;
+      max-width: 800px;
+    }
+    .back-link {
+      margin-bottom: 2rem;
+    }
+    .project-detail-card {
+      padding: 3rem;
+    }
+    .project-header {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .header-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .project-date {
+      font-size: 0.875rem;
+      color: var(--text-tertiary);
+    }
+    .project-header h1 {
+      margin-bottom: 0;
+      font-size: 2.5rem;
+    }
+    .project-meta {
+      margin-bottom: 2rem;
+    }
+    .meta-section h3 {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    .project-content {
+      margin-bottom: 2.5rem;
+    }
+    .project-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    .project-content p {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .project-actions {
+      display: flex;
+      gap: 1rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 2rem;
+    }
+    .github-btn {
+      gap: 0.5rem;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 5rem 2rem;
+      background-color: var(--bg-secondary);
+      border-radius: 0.5rem;
+      border: 1px dashed var(--border-color);
+    }
+    .empty-state i {
+      font-size: 3rem;
+      color: var(--text-tertiary);
+      margin-bottom: 1rem;
+    }

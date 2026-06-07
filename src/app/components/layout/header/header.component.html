@@ -1,0 +1,26 @@
+    <header class="header">
+      <div class="container header-content">
+        <a routerLink="/" class="logo">
+          Noureddine<span class="logo-dot">.dev</span>
+        </a>
+        
+        <nav class="desktop-nav">
+          <ul>
+            <li><a routerLink="/accueil" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Accueil</a></li>
+            <li><a routerLink="/projets" routerLinkActive="active">Projets</a></li>
+            <li><a routerLink="/competences" routerLinkActive="active">Compétences</a></li>
+            <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" (click)="themeService.toggleTheme()" aria-label="Toggle theme">
+            @if (themeService.isDarkMode()) {
+              <i class="fa-solid fa-sun icon-spin"></i>
+            } @else {
+              <i class="fa-solid fa-moon icon-bounce"></i>
+            }
+          </button>
+        </div>
+      </div>
+    </header>

@@ -1,0 +1,99 @@
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <span class="badge badge-published" style="margin-bottom: 1rem;">Disponible pour de nouveaux projets</span>
+          <h1>Bonjour, je suis <span style="color: var(--accent-primary)">Noureddine Oubraim</span>.</h1>
+          <p class="hero-description">
+            Développeur Full-Stack passionné par la création d'applications web performantes, robustes et élégantes. 
+            Je combine rigueur technique et design soigné pour offrir des expériences utilisateur mémorables.
+          </p>
+          <div class="hero-actions">
+            <a routerLink="/projets" class="btn btn-primary">Voir les Projets</a>
+            <a routerLink="/contact" class="btn btn-outline">Me Contacter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="competences" class="skills-section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" style="margin-bottom: 0;">Mes Compétences</h2>
+            <p style="margin-bottom: 0;">Un aperçu de mes principales compétences techniques.</p>
+          </div>
+          <a routerLink="/competences" class="btn btn-outline">Toutes mes compétences</a>
+        </div>
+        
+        <div class="skills-grid">
+          @for (skill of competenceService.allSkills().slice(0, 3); track skill.id) {
+            <div class="card skill-card">
+              <div class="skill-icon">
+                <i [ngClass]="skill.icone || 'fa-solid fa-code'"></i>
+              </div>
+              <h3 class="skill-name">{{ skill.nom }}</h3>
+              <div class="skill-level-bar">
+                <div class="skill-level-fill" [ngClass]="skill.niveau | lowercase"></div>
+              </div>
+              <div class="skill-footer">
+                <span class="skill-level-text">{{ skill.niveau }}</span>
+              </div>
+            </div>
+          } @empty {
+            <p>Aucune compétence enregistrée.</p>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="projects-section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" style="margin-bottom: 0;">Projets Récents</h2>
+            <p style="margin-bottom: 0;">Un aperçu de mes travaux récents et contributions techniques.</p>
+          </div>
+          <a routerLink="/projets" class="btn btn-outline">Tout afficher</a>
+        </div>
+        
+        <div class="projects-grid">
+          @for (project of projetService.publishedProjects().slice(0, 3); track project.id) {
+            <div class="card project-card">
+              <div class="project-tags">
+                @for (tech of project.technologies.slice(0, 3); track tech) {
+                  <span class="tech-tag">{{ tech }}</span>
+                }
+              </div>
+              <h3>{{ project.titre }}</h3>
+              <p class="project-desc">{{ project.description | truncate:100 }}</p>
+              <a [routerLink]="['/projet', project.id]" class="project-link">
+                Détails du projet <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          } @empty {
+            <p>Aucun projet publié pour le moment.</p>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="experience-section">
+      <div class="container">
+        <h2 class="section-title">Expérience Professionnelle</h2>
+        <div class="timeline">
+          @for (exp of experienceService.allExperiences(); track exp.id) {
+            <div class="timeline-item card">
+              <div class="timeline-badge"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="timeline-header">
+                <h3>{{ exp.titre }}</h3>
+                <span class="period">{{ exp.dateDebut }} &mdash; {{ exp.dateFin }}</span>
+              </div>
+              <div class="company-name">{{ exp.entreprise }}</div>
+              <p class="job-desc">{{ exp.description }}</p>
+            </div>
+          } @empty {
+            <p class="empty-state-text">Aucune expérience enregistrée.</p>
+          }
+        </div>
+      </div>
+    </section>
