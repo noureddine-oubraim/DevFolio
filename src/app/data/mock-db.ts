@@ -1,5 +1,7 @@
 import { Projet, Competence, Experience, Message } from '../models/types';
 
+export const PROJECTS_DB_VERSION = 4;
+
 export const initialProjects: Projet[] = [
   {
     id: 1,
@@ -141,19 +143,19 @@ export const initialSkills: Competence[] = [
   },
   {
     id: 4,
-    nom: 'Bases de données / SQL',
+    nom: 'SQL',
     niveau: 'Avancé',
     icone: 'fa-solid fa-database'
   },
   {
     id: 5,
-    nom: 'C / C++',
+    nom: 'C',
     niveau: 'Intermédiaire',
     icone: 'fa-solid fa-code'
   },
   {
     id: 6,
-    nom: 'HTML / CSS / PHP',
+    nom: 'HTML & CSS',
     niveau: 'Avancé',
     icone: 'fa-brands fa-html5'
   },
@@ -234,6 +236,24 @@ export const initialSkills: Competence[] = [
     nom: 'Kanban',
     niveau: 'Avancé',
     icone: 'fa-solid fa-table-columns'
+  },
+  {
+    id: 20,
+    nom: 'JavaScript',
+    niveau: 'Avancé',
+    icone: 'fa-brands fa-js'
+  },
+  {
+    id: 21,
+    nom: 'C++',
+    niveau: 'Intermédiaire',
+    icone: 'fa-solid fa-code'
+  },
+  {
+    id: 22,
+    nom: 'PHP',
+    niveau: 'Intermédiaire',
+    icone: 'fa-brands fa-php'
   }
 ];
 

@@ -1,10 +1,11 @@
     <div class="projects-admin-container">
-      <!-- Header with Indicators -->
+
+      <!-- Header -->
       <div class="admin-header-row">
         <div>
           <h1>Projects Hub</h1>
           <p class="indicator-text">
-            <strong>{{ totalCount() }}</strong> projets au total &middot; 
+            <strong>{{ totalCount() }}</strong> projets au total &middot;
             <span class="badge badge-published">{{ publishedCount() }} visibles en ligne</span>
           </p>
         </div>
@@ -13,19 +14,17 @@
         </button>
       </div>
 
-      <!-- Search and Sort Panel -->
+      <!-- Recherche & tri -->
       <div class="controls-panel card">
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" placeholder="Rechercher un projet..."
-                 [value]="searchQuery()"
-                 (input)="searchQuery.set($any($event.target).value)" />
+                 [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" name="search" />
         </div>
         <div class="sort-box">
           <label>Trier par :</label>
-          <select class="input-control select-sort"
-                  [value]="sortBy()"
-                  (change)="sortBy.set($any($event.target).value)">
+          <select class="input-control select-sort" name="sort"
+                  [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
             <option value="recent">Plus récent</option>
             <option value="oldest">Plus ancien</option>
             <option value="title">Titre (A-Z)</option>
@@ -33,7 +32,7 @@
         </div>
       </div>
 
-      <!-- Projects Table -->
+      <!-- Tableau -->
       <div class="table-container card">
         @if (filteredAndSortedProjects().length === 0) {
           <div class="empty-table">
@@ -56,13 +55,11 @@
                 <tr>
                   <td class="proj-title-cell">
                     <div class="proj-title-info">
-                      <div class="avatar-icon">
-                        {{ proj.titre.slice(0,1).toUpperCase() }}
-                      </div>
+                      <div class="avatar-icon">{{ proj.titre.slice(0,1).toUpperCase() }}</div>
                       <div>
                         <span class="proj-name">{{ proj.titre }}</span>
                         @if (proj.github) {
-                          <a [href]="proj.github" target="_blank" class="github-icon-link" title="Code Source">
+                          <a [attr.href]="proj.github" target="_blank" class="github-icon-link">
                             <i class="fa-brands fa-github"></i>
                           </a>
                         }
@@ -77,22 +74,19 @@
                     </div>
                   </td>
                   <td>
-                    <button class="status-toggle-btn" 
+                    <button class="status-toggle-btn"
                             [class.pub]="proj.statut === 'Publié'"
                             [class.draft]="proj.statut === 'Brouillon'"
-                            (click)="toggleStatus(proj)"
-                            title="Cliquez pour changer le statut">
+                            (click)="toggleStatus(proj)">
                       {{ proj.statut }}
                     </button>
                   </td>
-                  <td>
-                    <span class="proj-date-text">{{ proj.date || 'Non spécifiée' }}</span>
-                  </td>
+                  <td><span class="proj-date-text">{{ proj.date || 'Non spécifiée' }}</span></td>
                   <td class="actions-cell">
-                    <button class="action-btn edit-btn" (click)="openEditModal(proj)" title="Modifier">
+                    <button class="action-btn edit-btn" (click)="openEditModal(proj)">
                       <i class="fa-solid fa-pen"></i>
                     </button>
-                    <button class="action-btn delete-btn" (click)="confirmDelete(proj.id)" title="Supprimer">
+                    <button class="action-btn delete-btn" (click)="confirmDelete(proj.id)">
                       <i class="fa-solid fa-xmark"></i>
                     </button>
                   </td>
@@ -103,77 +97,76 @@
         }
       </div>
 
-      <!-- Add/Edit Project Modal (RM1 Validations inside) -->
+      <!-- Modale ajout / modification -->
       @if (showFormModal()) {
         <div class="modal-overlay">
           <div class="modal-card form-modal card">
             <h2>{{ isEditing() ? 'Modifier le projet' : 'Nouveau Projet' }}</h2>
-            <form [formGroup]="projForm" (ngSubmit)="saveProject()" novalidate>
+
+            <form (ngSubmit)="saveProject()" novalidate>
 
               <div class="input-group">
                 <label for="titre">Titre du Projet *</label>
-                <input type="text" id="titre" formControlName="titre" class="input-control" />
-                @if (projForm.get('titre')?.invalid && projForm.get('titre')?.touched) {
-                  <div class="error-text">
-                    @if (projForm.get('titre')?.errors?.['required']) { <span>Le titre est requis.</span> }
-                    @if (projForm.get('titre')?.errors?.['minlength']) { <span>Le titre doit faire au moins 3 caractères.</span> }
-                  </div>
+                <input id="titre" name="titre" type="text" class="input-control"
+                       [ngModel]="titre()" (ngModelChange)="titre.set($event)" />
+                @if (titreErreur) {
+                  <div class="error-text">{{ titreErreur }}</div>
                 }
               </div>
 
               <div class="input-group">
                 <label for="description">Description *</label>
-                <textarea id="description" formControlName="description" class="input-control" rows="4"></textarea>
-                @if (projForm.get('description')?.invalid && projForm.get('description')?.touched) {
-                  <div class="error-text">
-                    @if (projForm.get('description')?.errors?.['required']) { <span>La description est requise.</span> }
-                    @if (projForm.get('description')?.errors?.['minlength']) { <span>La description doit faire au moins 10 caractères.</span> }
-                  </div>
+                <textarea id="description" name="description" class="input-control" rows="4"
+                          [ngModel]="description()" (ngModelChange)="description.set($event)"></textarea>
+                @if (descriptionErreur) {
+                  <div class="error-text">{{ descriptionErreur }}</div>
                 }
               </div>
 
               <div class="input-group">
                 <label for="techInput">Technologies (séparées par des virgules) *</label>
-                <input type="text" id="techInput" formControlName="techInput" class="input-control"
-                       placeholder="Ex: Angular, TypeScript, Node.js" />
-                @if (projForm.get('techInput')?.invalid && projForm.get('techInput')?.touched) {
-                  <div class="error-text">
-                    <span>Veuillez spécifier au moins une technologie.</span>
-                  </div>
+                <input id="techInput" name="techInput" type="text" class="input-control"
+                       placeholder="Ex: Angular, TypeScript, Node.js"
+                       [ngModel]="techInput()" (ngModelChange)="techInput.set($event)" />
+                @if (techInputErreur) {
+                  <div class="error-text">{{ techInputErreur }}</div>
                 }
               </div>
 
               <div class="form-row-2">
                 <div class="input-group">
                   <label for="statut">Statut</label>
-                  <select id="statut" formControlName="statut" class="input-control">
+                  <select id="statut" name="statut" class="input-control"
+                          [ngModel]="statut()" (ngModelChange)="statut.set($event)">
                     <option value="Publié">Publié</option>
                     <option value="Brouillon">Brouillon</option>
                   </select>
                 </div>
-
                 <div class="input-group">
                   <label for="date">Date de création</label>
-                  <input type="date" id="date" formControlName="date" class="input-control" />
+                  <input id="date" name="date" type="date" class="input-control"
+                         [ngModel]="date()" (ngModelChange)="date.set($event)" />
                 </div>
               </div>
 
               <div class="input-group">
                 <label for="github">Lien GitHub (optionnel)</label>
-                <input type="url" id="github" formControlName="github" class="input-control"
-                       placeholder="https://github.com/..." />
+                <input id="github" name="github" type="url" class="input-control"
+                       placeholder="https://github.com/..."
+                       [ngModel]="github()" (ngModelChange)="github.set($event)" />
               </div>
 
               <div class="modal-actions">
                 <button type="button" class="btn btn-outline" (click)="closeFormModal()">Annuler</button>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
               </div>
+
             </form>
           </div>
         </div>
       }
 
-      <!-- Delete Confirmation Modal (RM5) -->
+      <!-- Modale suppression -->
       @if (showDeleteModal()) {
         <div class="modal-overlay">
           <div class="modal-card confirmation-modal card">
@@ -186,4 +179,5 @@
           </div>
         </div>
       }
+
     </div>

@@ -1,27 +1,26 @@
-import { Component, inject, input, computed } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { ProjetService } from '../../../services/projet.service';
-import { CommonModule } from '@angular/common';
+import { Projet } from '../../../models/types';
 
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, DatePipe],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css'
 })
-export class ProjectDetailComponent {
-  projetService = inject(ProjetService);
-  
-  // Input parameter binding from route
-  id = input<string>();
-  
-  // Computed project based on route id
-  project = computed(() => {
-    const projectId = this.id();
-    if (projectId) {
-      return this.projetService.getProjectById(+projectId);
-    }
-    return undefined;
-  });
+export class ProjectDetailComponent implements OnInit {
+  private route        = inject(ActivatedRoute);
+  private projetService = inject(ProjetService);
+
+  projet = signal<Projet | undefined>(undefined);
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      this.projet.set(id ? this.projetService.getProjectById(+id) : undefined);
+    });
+  }
 }

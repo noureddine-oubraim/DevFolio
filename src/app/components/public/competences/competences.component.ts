@@ -25,12 +25,12 @@ export class CompetencesComponent {
     { key: 'tool', label: 'Outils & Méthodes', icon: 'fa-solid fa-screwdriver-wrench' },
   ];
 
-  // Category mapping – properly classifying each skill
+  // Category mapping — exact skill names, one entry per card
   private categoryMap: Record<string, string[]> = {
     framework: ['Angular', 'React', 'Spring Boot', 'Node.js'],
-    language: ['Java', 'C / C++', 'TypeScript', 'HTML / CSS / PHP', 'Powershell', 'Programmation système', 'Algorithmique & Structures de données'],
-    database: ['Bases de données / SQL', 'MongoDB'],
-    tool: ['UML & Modélisation', 'Git & GitHub', 'Agile / Jira', 'Docker', 'Scrum', 'Kanban'],
+    language: ['Java', 'C', 'C++', 'JavaScript', 'TypeScript', 'HTML & CSS', 'PHP', 'Powershell'],
+    database: ['SQL', 'MongoDB'],
+    tool: ['UML & Modélisation', 'Git & GitHub', 'Agile / Jira', 'Docker', 'Algorithmique & Structures de données', 'Programmation système', 'Scrum', 'Kanban'],
   };
 
   filteredSkills = computed(() => {
@@ -38,7 +38,8 @@ export class CompetencesComponent {
     const all = this.competenceService.allSkills();
     if (cat === 'all') return all;
     const names = this.categoryMap[cat] || [];
-    return all.filter(s => names.some(n => s.nom.toLowerCase().includes(n.toLowerCase()) || n.toLowerCase().includes(s.nom.toLowerCase())));
+    // Exact match only — prevents 'Java' from bleeding into 'JavaScript'
+    return all.filter(s => names.some(n => s.nom.toLowerCase() === n.toLowerCase()));
   });
 
   totalSkills = computed(() => this.competenceService.allSkills().length);

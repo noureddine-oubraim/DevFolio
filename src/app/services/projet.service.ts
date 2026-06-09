@@ -1,34 +1,39 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { Projet } from '../models/types';
-import { initialProjects } from '../data/mock-db';
+import { initialProjects, PROJECTS_DB_VERSION } from '../data/mock-db';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjetService {
-  private readonly STORAGE_KEY = 'devfolio_projects_v3';
-  
-  // State signal holding all projects
+  private readonly STORAGE_KEY = 'devfolio_projects';
+
   private projects = signal<Projet[]>(this.loadProjects());
 
-  // Computed signals for convenience
   public allProjects = computed(() => this.projects());
   public publishedProjects = computed(() => this.projects().filter(p => p.statut === 'Publié'));
 
   constructor() {}
 
   private loadProjects(): Projet[] {
-    const data = localStorage.getItem(this.STORAGE_KEY);
-    if (data) {
-      try { return JSON.parse(data); } catch { /* corrupted — fall through */ }
-    }
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(initialProjects));
-    return initialProjects;
+    // Always start from the source of truth — clears any stale localStorage data
+    Object.keys(localStorage)
+      .filter(k => k.startsWith('devfolio_projects'))
+      .forEach(k => localStorage.removeItem(k));
+
+    return [...initialProjects];
+  }
+
+  private persist(projects: Projet[]): void {
+    localStorage.setItem(
+      this.STORAGE_KEY,
+      JSON.stringify({ v: PROJECTS_DB_VERSION, data: projects })
+    );
   }
 
   private saveProjects(projects: Projet[]): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(projects));
-    this.projects.set(projects); // Update the signal
+    this.persist(projects);
+    this.projects.set(projects);
   }
 
   getProjectById(id: number): Projet | undefined {
@@ -36,34 +41,28 @@ export class ProjetService {
   }
 
   addProject(projet: Omit<Projet, 'id'>): void {
-    const currentProjects = this.projects();
-    const newId = currentProjects.length > 0 ? Math.max(...currentProjects.map(p => p.id)) + 1 : 1;
-    const newProject: Projet = { ...projet, id: newId };
-    
-    this.saveProjects([...currentProjects, newProject]);
+    const current = this.projects();
+    const newId = current.length > 0 ? Math.max(...current.map(p => p.id)) + 1 : 1;
+    this.saveProjects([...current, { ...projet, id: newId }]);
   }
 
-  updateProject(updatedProject: Projet): void {
-    const currentProjects = this.projects();
-    const index = currentProjects.findIndex(p => p.id === updatedProject.id);
-    
-    if (index !== -1) {
-      const newProjects = [...currentProjects];
-      newProjects[index] = updatedProject;
-      this.saveProjects(newProjects);
+  updateProject(updated: Projet): void {
+    const current = this.projects();
+    const idx = current.findIndex(p => p.id === updated.id);
+    if (idx !== -1) {
+      const next = [...current];
+      next[idx] = updated;
+      this.saveProjects(next);
     }
   }
 
   deleteProject(id: number): void {
-    const newProjects = this.projects().filter(p => p.id !== id);
-    this.saveProjects(newProjects);
+    this.saveProjects(this.projects().filter(p => p.id !== id));
   }
 
   getAllTechnologies(): string[] {
     const techs = new Set<string>();
-    this.projects().forEach(p => {
-      p.technologies.forEach(t => techs.add(t));
-    });
+    this.projects().forEach(p => p.technologies.forEach(t => techs.add(t)));
     return Array.from(techs).sort();
   }
 }
