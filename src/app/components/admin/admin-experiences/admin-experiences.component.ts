@@ -15,7 +15,9 @@ export class AdminExperiencesComponent {
   private experienceService = inject(ExperienceService);
   private fb = inject(FormBuilder);
 
-  experiences = this.experienceService.allExperiences;
+  get experiences(): Experience[] {
+    return this.experienceService.allExperiences;
+  }
 
   expForm: FormGroup = this.fb.group({
     titre:       ['', Validators.required],

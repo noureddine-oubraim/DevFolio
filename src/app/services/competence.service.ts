@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Competence } from '../models/types';
 import { initialSkills } from '../data/mock-db';
 
@@ -11,8 +11,9 @@ export class CompetenceService {
   // State signal holding all skills
   private skills = signal<Competence[]>(this.loadSkills());
 
-  // Computed signal for convenience
-  public allSkills = computed(() => this.skills());
+  get allSkills(): Competence[] {
+    return this.skills();
+  }
 
   constructor() {}
 

@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 export interface SpokenLanguage {
   id: number;
@@ -48,11 +48,25 @@ export class ProfileService {
   
   private state = signal<ProfileData>(this.loadProfile());
 
-  public profile = computed(() => this.state());
-  public cvDataUrl = computed(() => this.state().cvDataUrl);
-  public spokenLanguages = computed(() => this.state().spokenLanguages);
-  public interests = computed(() => this.state().interests);
-  public softSkills = computed(() => this.state().softSkills);
+  get profile(): ProfileData {
+    return this.state();
+  }
+
+  get cvDataUrl(): string | null {
+    return this.state().cvDataUrl;
+  }
+
+  get spokenLanguages(): SpokenLanguage[] {
+    return this.state().spokenLanguages;
+  }
+
+  get interests(): Interest[] {
+    return this.state().interests;
+  }
+
+  get softSkills(): string[] {
+    return this.state().softSkills;
+  }
 
   constructor() {}
 

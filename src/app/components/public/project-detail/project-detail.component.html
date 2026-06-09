@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  @if (projet(); as proj) {
+  @if (projet; as proj) {
 
     <div class="pd-hero">
       <div class="container">
@@ -31,12 +31,43 @@
             <h1 class="pd-title">{{ proj.titre }}</h1>
             <p class="pd-description">{{ proj.description }}</p>
 
-            @if (proj.github) {
-              <a [attr.href]="proj.github" target="_blank" rel="noopener noreferrer"
-                 class="btn btn-primary pd-github-btn">
-                <i class="fa-brands fa-github"></i> Voir le code sur GitHub
-              </a>
+            @if (proj.contexte || proj.role || proj.duree || (proj.defis?.length ?? 0) > 0) {
+              <div class="pd-inline-details">
+                @if (proj.contexte) {
+                  <div class="pd-inline-item pd-inline-wide">
+                    <span>Contexte</span>
+                    <strong>{{ proj.contexte }}</strong>
+                  </div>
+                }
+                @if (proj.role) {
+                  <div class="pd-inline-item">
+                    <span>Role</span>
+                    <strong>{{ proj.role }}</strong>
+                  </div>
+                }
+                @if (proj.duree) {
+                  <div class="pd-inline-item">
+                    <span>Duree</span>
+                    <strong>{{ proj.duree }}</strong>
+                  </div>
+                }
+                @if ((proj.defis?.length ?? 0) > 0) {
+                  <div class="pd-inline-item pd-inline-wide">
+                    <span>Defis techniques</span>
+                    <ul>
+                      @for (defi of proj.defis; track defi) {
+                        <li>{{ defi }}</li>
+                      }
+                    </ul>
+                  </div>
+                }
+              </div>
             }
+
+            <a [attr.href]="proj.github || 'https://github.com'" target="_blank" rel="noopener noreferrer"
+               class="btn btn-primary pd-github-btn">
+              <i class="fa-brands fa-github"></i> Voir le code sur GitHub
+            </a>
           </div>
 
           <!-- Droite : stack technique ─────────── -->
@@ -58,6 +89,46 @@
         </div>
       </div>
     </div>
+
+    @if (proj.contexte || proj.role || proj.duree || (proj.defis?.length ?? 0) > 0) {
+      <div class="pd-details-section">
+        <div class="container">
+          <div class="pd-details-grid">
+            @if (proj.contexte) {
+              <section class="pd-detail-block pd-detail-wide">
+                <h2><i class="fa-solid fa-bullseye"></i> Contexte</h2>
+                <p>{{ proj.contexte }}</p>
+              </section>
+            }
+
+            @if (proj.role) {
+              <section class="pd-detail-block">
+                <h2><i class="fa-solid fa-user-gear"></i> Role</h2>
+                <p>{{ proj.role }}</p>
+              </section>
+            }
+
+            @if (proj.duree) {
+              <section class="pd-detail-block">
+                <h2><i class="fa-regular fa-clock"></i> Duree</h2>
+                <p>{{ proj.duree }}</p>
+              </section>
+            }
+
+            @if ((proj.defis?.length ?? 0) > 0) {
+              <section class="pd-detail-block pd-detail-wide">
+                <h2><i class="fa-solid fa-list-check"></i> Defis techniques</h2>
+                <ul class="pd-defis-list">
+                  @for (defi of proj.defis; track defi) {
+                    <li>{{ defi }}</li>
+                  }
+                </ul>
+              </section>
+            }
+          </div>
+        </div>
+      </div>
+    }
 
   } @else {
 

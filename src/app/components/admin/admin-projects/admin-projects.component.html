@@ -1,112 +1,115 @@
-    <div class="projects-admin-container">
+<div class="projects-admin-container">
+  <div class="admin-header-row">
+    <div>
+      <h1>Projects Hub</h1>
+      <p class="indicator-text">
+        <strong>{{ totalCount }}</strong> projets au total &middot;
+        <span class="badge badge-published">{{ publishedCount }} visibles en ligne</span>
+      </p>
+    </div>
+    <button class="btn btn-primary" (click)="openAddModal()">
+      <i class="fa-solid fa-plus"></i> Nouveau projet
+    </button>
+  </div>
 
-      <!-- Header -->
-      <div class="admin-header-row">
-        <div>
-          <h1>Projects Hub</h1>
-          <p class="indicator-text">
-            <strong>{{ totalCount() }}</strong> projets au total &middot;
-            <span class="badge badge-published">{{ publishedCount() }} visibles en ligne</span>
-          </p>
-        </div>
-        <button class="btn btn-primary" (click)="openAddModal()">
-          <i class="fa-solid fa-plus"></i> Nouveau projet
-        </button>
+  <div class="controls-panel card">
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Rechercher un projet..."
+             [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" name="search" />
+    </div>
+    <div class="sort-box">
+      <label>Trier par :</label>
+      <select class="input-control select-sort" name="sort"
+              [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
+        <option value="recent">Plus recent</option>
+        <option value="oldest">Plus ancien</option>
+        <option value="title">Titre (A-Z)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="table-container card">
+    @if (filteredAndSortedProjects.length === 0) {
+      <div class="empty-table">
+        <i class="fa-solid fa-folder-open"></i>
+        <p>Aucun projet ne correspond a votre recherche.</p>
       </div>
+    } @else {
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Projet</th>
+            <th>Technologies</th>
+            <th>Statut</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (proj of filteredAndSortedProjects; track proj.id) {
+            <tr>
+              <td class="proj-title-cell">
+                <div class="proj-title-info">
+                  <div class="avatar-icon">{{ proj.titre.slice(0, 1).toUpperCase() }}</div>
+                  <div>
+                    <span class="proj-name">{{ proj.titre }}</span>
+                    @if (proj.github) {
+                      <a [attr.href]="proj.github" target="_blank" rel="noopener noreferrer" class="github-icon-link">
+                        <i class="fa-brands fa-github"></i>
+                      </a>
+                    }
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="tech-tags-list">
+                  @for (tech of proj.technologies; track tech) {
+                    <span class="tech-tag mini">{{ tech }}</span>
+                  }
+                </div>
+              </td>
+              <td>
+                <button class="status-toggle-btn"
+                        [class.pub]="proj.statut === 'Publié'"
+                        [class.draft]="proj.statut === 'Brouillon'"
+                        (click)="toggleStatus(proj)">
+                  {{ proj.statut }}
+                </button>
+              </td>
+              <td><span class="proj-date-text">{{ proj.date || 'Non specifiee' }}</span></td>
+              <td class="actions-cell">
+                <button class="action-btn edit-btn" (click)="openEditModal(proj)" title="Modifier">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button class="action-btn delete-btn" (click)="confirmDelete(proj.id)" title="Supprimer">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </div>
 
-      <!-- Recherche & tri -->
-      <div class="controls-panel card">
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Rechercher un projet..."
-                 [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" name="search" />
+  @if (showFormModal()) {
+    <div class="modal-overlay">
+      <div class="modal-card form-modal card">
+        <div class="form-modal-header">
+          <h2>{{ isEditing() ? 'Modifier le projet' : 'Nouveau projet' }}</h2>
+          <button type="button" class="action-btn" (click)="closeFormModal()" title="Fermer">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
-        <div class="sort-box">
-          <label>Trier par :</label>
-          <select class="input-control select-sort" name="sort"
-                  [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
-            <option value="recent">Plus récent</option>
-            <option value="oldest">Plus ancien</option>
-            <option value="title">Titre (A-Z)</option>
-          </select>
-        </div>
-      </div>
 
-      <!-- Tableau -->
-      <div class="table-container card">
-        @if (filteredAndSortedProjects().length === 0) {
-          <div class="empty-table">
-            <i class="fa-solid fa-folder-open"></i>
-            <p>Aucun projet ne correspond à votre recherche.</p>
-          </div>
-        } @else {
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Projet</th>
-                <th>Technologies</th>
-                <th>Statut</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (proj of filteredAndSortedProjects(); track proj.id) {
-                <tr>
-                  <td class="proj-title-cell">
-                    <div class="proj-title-info">
-                      <div class="avatar-icon">{{ proj.titre.slice(0,1).toUpperCase() }}</div>
-                      <div>
-                        <span class="proj-name">{{ proj.titre }}</span>
-                        @if (proj.github) {
-                          <a [attr.href]="proj.github" target="_blank" class="github-icon-link">
-                            <i class="fa-brands fa-github"></i>
-                          </a>
-                        }
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="tech-tags-list">
-                      @for (tech of proj.technologies; track tech) {
-                        <span class="tech-tag mini">{{ tech }}</span>
-                      }
-                    </div>
-                  </td>
-                  <td>
-                    <button class="status-toggle-btn"
-                            [class.pub]="proj.statut === 'Publié'"
-                            [class.draft]="proj.statut === 'Brouillon'"
-                            (click)="toggleStatus(proj)">
-                      {{ proj.statut }}
-                    </button>
-                  </td>
-                  <td><span class="proj-date-text">{{ proj.date || 'Non spécifiée' }}</span></td>
-                  <td class="actions-cell">
-                    <button class="action-btn edit-btn" (click)="openEditModal(proj)">
-                      <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <button class="action-btn delete-btn" (click)="confirmDelete(proj.id)">
-                      <i class="fa-solid fa-xmark"></i>
-                    </button>
-                  </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        }
-      </div>
-
-      <!-- Modale ajout / modification -->
-      @if (showFormModal()) {
-        <div class="modal-overlay">
-          <div class="modal-card form-modal card">
-            <h2>{{ isEditing() ? 'Modifier le projet' : 'Nouveau Projet' }}</h2>
-
-            <form (ngSubmit)="saveProject()" novalidate>
+        <form (ngSubmit)="saveProject()" novalidate>
+          <div class="form-scroll">
+            <section class="form-section">
+              <h3>Informations principales</h3>
 
               <div class="input-group">
-                <label for="titre">Titre du Projet *</label>
+                <label for="titre">Titre du projet *</label>
                 <input id="titre" name="titre" type="text" class="input-control"
                        [ngModel]="titre()" (ngModelChange)="titre.set($event)" />
                 @if (titreErreur) {
@@ -124,7 +127,7 @@
               </div>
 
               <div class="input-group">
-                <label for="techInput">Technologies (séparées par des virgules) *</label>
+                <label for="techInput">Technologies separees par des virgules *</label>
                 <input id="techInput" name="techInput" type="text" class="input-control"
                        placeholder="Ex: Angular, TypeScript, Node.js"
                        [ngModel]="techInput()" (ngModelChange)="techInput.set($event)" />
@@ -132,6 +135,10 @@
                   <div class="error-text">{{ techInputErreur }}</div>
                 }
               </div>
+            </section>
+
+            <section class="form-section">
+              <h3>Publication</h3>
 
               <div class="form-row-2">
                 <div class="input-group">
@@ -143,7 +150,7 @@
                   </select>
                 </div>
                 <div class="input-group">
-                  <label for="date">Date de création</label>
+                  <label for="date">Date de creation</label>
                   <input id="date" name="date" type="date" class="input-control"
                          [ngModel]="date()" (ngModelChange)="date.set($event)" />
                 </div>
@@ -155,29 +162,61 @@
                        placeholder="https://github.com/..."
                        [ngModel]="github()" (ngModelChange)="github.set($event)" />
               </div>
+            </section>
 
-              <div class="modal-actions">
-                <button type="button" class="btn btn-outline" (click)="closeFormModal()">Annuler</button>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <section class="form-section">
+              <h3>Details du projet (optionnel)</h3>
+
+              <div class="input-group">
+                <label for="contexte">Contexte</label>
+                <textarea id="contexte" name="contexte" class="input-control" rows="3"
+                          placeholder="Projet academique, besoin client, objectif principal..."
+                          [ngModel]="contexte()" (ngModelChange)="contexte.set($event)"></textarea>
               </div>
 
-            </form>
-          </div>
-        </div>
-      }
+              <div class="form-row-2">
+                <div class="input-group">
+                  <label for="role">Role</label>
+                  <input id="role" name="role" type="text" class="input-control"
+                         placeholder="Ex: Developpeur Full-Stack"
+                         [ngModel]="role()" (ngModelChange)="role.set($event)" />
+                </div>
+                <div class="input-group">
+                  <label for="duree">Duree</label>
+                  <input id="duree" name="duree" type="text" class="input-control"
+                         placeholder="Ex: 2 mois"
+                         [ngModel]="duree()" (ngModelChange)="duree.set($event)" />
+                </div>
+              </div>
 
-      <!-- Modale suppression -->
-      @if (showDeleteModal()) {
-        <div class="modal-overlay">
-          <div class="modal-card confirmation-modal card">
-            <h3><i class="fa-solid fa-triangle-exclamation modal-warning-icon"></i> Confirmer la suppression</h3>
-            <p>Êtes-vous sûr de vouloir supprimer définitivement ce projet ? Cette action est irréversible.</p>
-            <div class="modal-actions">
-              <button class="btn btn-outline" (click)="cancelDelete()">Annuler</button>
-              <button class="btn btn-danger" (click)="deleteConfirmed()">Supprimer</button>
-            </div>
+              <div class="input-group">
+                <label for="defisInput">Defis techniques</label>
+                <textarea id="defisInput" name="defisInput" class="input-control" rows="4"
+                          placeholder="Un defi par ligne, ou separes par des virgules"
+                          [ngModel]="defisInput()" (ngModelChange)="defisInput.set($event)"></textarea>
+              </div>
+            </section>
           </div>
-        </div>
-      }
 
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" (click)="closeFormModal()">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+      </div>
     </div>
+  }
+
+  @if (showDeleteModal()) {
+    <div class="modal-overlay">
+      <div class="modal-card confirmation-modal card">
+        <h3><i class="fa-solid fa-triangle-exclamation modal-warning-icon"></i> Confirmer la suppression</h3>
+        <p>Etes-vous sur de vouloir supprimer definitivement ce projet ? Cette action est irreversible.</p>
+        <div class="modal-actions">
+          <button class="btn btn-outline" (click)="cancelDelete()">Annuler</button>
+          <button class="btn btn-danger" (click)="deleteConfirmed()">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

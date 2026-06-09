@@ -10,8 +10,8 @@
           <div class="hero-actions">
             <a routerLink="/projets" class="btn btn-primary">Voir les Projets</a>
             <a routerLink="/contact" class="btn btn-outline">Me Contacter</a>
-            @if (profileService.cvDataUrl()) {
-              <a [href]="profileService.cvDataUrl()" download="CV_Chakri_Sana.pdf" class="btn btn-outline cv-btn">
+            @if (profileService.cvDataUrl) {
+              <a [href]="profileService.cvDataUrl" download="CV_Chakri_Sana.pdf" class="btn btn-outline cv-btn">
                 <i class="fa-solid fa-file-pdf"></i> Télécharger mon CV
               </a>
             }
@@ -31,7 +31,7 @@
         </div>
         
         <div class="skills-grid">
-          @for (skill of competenceService.allSkills().slice(0, 3); track skill.id) {
+          @for (skill of competenceService.allSkills.slice(0, 3); track skill.id) {
             <div class="card skill-card">
               <div class="skill-icon">
                 <i [ngClass]="skill.icone || 'fa-solid fa-code'"></i>
@@ -62,7 +62,7 @@
         </div>
         
         <div class="projects-grid">
-          @for (project of projetService.publishedProjects().slice(0, 3); track project.id) {
+          @for (project of projetService.publishedProjects.slice(0, 3); track project.id) {
             <div class="card project-card">
               <div class="project-tags">
                 @for (tech of project.technologies.slice(0, 3); track tech) {
@@ -86,7 +86,7 @@
       <div class="container">
         <h2 class="section-title">Expérience Professionnelle</h2>
         <div class="timeline">
-          @for (exp of experienceService.allExperiences(); track exp.id) {
+          @for (exp of experienceService.allExperiences; track exp.id) {
             <div class="timeline-item card">
               <div class="timeline-badge"><i class="fa-solid fa-briefcase"></i></div>
               <div class="timeline-header">

@@ -20,7 +20,7 @@
             </tr>
           </thead>
           <tbody>
-            @for (exp of experiences(); track exp.id) {
+            @for (exp of experiences; track exp.id) {
               <tr>
                 <td><strong>{{ exp.titre }}</strong></td>
                 <td>{{ exp.entreprise }}</td>

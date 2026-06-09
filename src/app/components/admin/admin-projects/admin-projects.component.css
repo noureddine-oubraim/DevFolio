@@ -194,6 +194,7 @@
       align-items: center;
       justify-content: center;
       z-index: 100;
+      padding: 1.5rem;
     }
     .modal-card {
       background-color: var(--bg-secondary);
@@ -205,7 +206,48 @@
     }
     .form-modal {
       width: 95%;
-      max-width: 600px;
+      max-width: 880px;
+      max-height: calc(100vh - 3rem);
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      overflow: hidden;
+    }
+    .form-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .form-modal-header h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+    .form-modal form {
+      display: flex;
+      min-height: 0;
+      flex: 1;
+      flex-direction: column;
+    }
+    .form-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1.5rem;
+      overflow-y: auto;
+    }
+    .form-section {
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      background-color: var(--bg-primary);
+    }
+    .form-section h3 {
+      margin: 0 0 1rem;
+      font-size: 0.95rem;
+      color: var(--text-primary);
     }
     .confirmation-modal {
       width: 90%;
@@ -225,7 +267,10 @@
       display: flex;
       justify-content: flex-end;
       gap: 1rem;
-      margin-top: 2rem;
+      margin-top: 0;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
     }
     .btn-danger {
       background: #ef4444;
@@ -238,4 +283,25 @@
     @keyframes scaleUp {
       from { transform: scale(0.95); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
+    }
+
+    @media (max-width: 700px) {
+      .admin-header-row,
+      .controls-panel {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .search-box {
+        max-width: none;
+      }
+      .form-row-2 {
+        grid-template-columns: 1fr;
+      }
+      .modal-overlay {
+        padding: 0.75rem;
+      }
+      .form-modal {
+        width: 100%;
+        max-height: calc(100vh - 1.5rem);
+      }
     }

@@ -13,7 +13,10 @@ import { TruncatePipe } from '../../../pipes/truncate.pipe';
 })
 export class AdminMessagesComponent {
   private messageService = inject(MessageService);
-  messages = this.messageService.allMessages;
+
+  get messages(): Message[] {
+    return this.messageService.allMessages;
+  }
 
   selectedMessage = signal<Message | null>(null);
   

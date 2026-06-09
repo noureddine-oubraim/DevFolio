@@ -22,7 +22,7 @@
       </div>
 
       <div class="projects-grid">
-        @for (project of filteredProjects(); track project.id) {
+        @for (project of filteredProjects; track project.id) {
           <div class="card project-card" appHighlight>
             <div class="project-tags">
               @for (tech of project.technologies; track tech) {

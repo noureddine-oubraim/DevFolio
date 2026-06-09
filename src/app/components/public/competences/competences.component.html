@@ -27,7 +27,7 @@
       <!-- Skills Grid -->
       <div class="container skills-container">
         <div class="skills-grid">
-          @for (skill of filteredSkills(); track skill.id) {
+          @for (skill of filteredSkills; track skill.id) {
             <div class="skill-card card" [attr.data-level]="skill.niveau">
               <div class="card-top">
                 <div class="skill-icon" [ngClass]="'lvl-' + (skill.niveau | lowercase | slice:0:3)">
@@ -58,19 +58,19 @@
         <!-- Stats Row -->
         <div class="stats-row">
           <div class="stat-card card">
-            <div class="stat-number accent">{{ advancedCount() }}</div>
+            <div class="stat-number accent">{{ advancedCount }}</div>
             <div class="stat-label">Compétences Avancées</div>
           </div>
           <div class="stat-card card">
-            <div class="stat-number accent">{{ intermediateCount() }}</div>
+            <div class="stat-number accent">{{ intermediateCount }}</div>
             <div class="stat-label">Niveau Intermédiaire</div>
           </div>
           <div class="stat-card card">
-            <div class="stat-number accent">{{ beginnerCount() }}</div>
+            <div class="stat-number accent">{{ beginnerCount }}</div>
             <div class="stat-label">En Apprentissage</div>
           </div>
           <div class="stat-card card">
-            <div class="stat-number accent">{{ totalSkills() }}</div>
+            <div class="stat-number accent">{{ totalSkills }}</div>
             <div class="stat-label">Total Compétences</div>
           </div>
         </div>
@@ -92,7 +92,7 @@
             <div class="extra-card card">
               <h3><i class="fa-solid fa-star"></i> Qualités Personnelles</h3>
               <div class="tags-wrap">
-                @for (q of softSkills(); track q) {
+                @for (q of softSkills; track q) {
                   <span class="extra-tag">{{ q }}</span>
                 }
               </div>
@@ -101,7 +101,7 @@
             <div class="extra-card card">
               <h3><i class="fa-solid fa-language"></i> Langues</h3>
               <div class="lang-list">
-                @for (lang of languages(); track lang.name) {
+                @for (lang of languages; track lang.name) {
                   <div class="lang-item">
                     <span class="lang-flag">{{ lang.flag }}</span>
                     <div class="lang-info">
@@ -116,7 +116,7 @@
             <div class="extra-card card">
               <h3><i class="fa-solid fa-heart"></i> Centres d'Intérêt</h3>
               <div class="interests-grid">
-                @for (interest of interests(); track interest.label) {
+                @for (interest of interests; track interest.label) {
                   <div class="interest-item">
                     <i [ngClass]="interest.icon"></i>
                     <span>{{ interest.label }}</span>

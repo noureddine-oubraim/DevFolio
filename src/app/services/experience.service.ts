@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Experience } from '../models/types';
 import { initialExperiences } from '../data/mock-db';
 
@@ -11,8 +11,9 @@ export class ExperienceService {
   // State signal holding all experiences
   private experiences = signal<Experience[]>(this.loadExperiences());
 
-  // Computed signal for convenient public read
-  public allExperiences = computed(() => this.experiences());
+  get allExperiences(): Experience[] {
+    return this.experiences();
+  }
 
   constructor() {}
 

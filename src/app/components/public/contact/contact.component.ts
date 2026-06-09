@@ -1,37 +1,65 @@
 import { Component, signal, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [FormsModule],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
   private messageService = inject(MessageService);
-  private fb = inject(FormBuilder);
 
-  contactForm: FormGroup = this.fb.group({
-    nom:     ['', [Validators.required, Validators.minLength(2)]],
-    email:   ['', [Validators.required, Validators.email]],
-    sujet:   ['', [Validators.required, Validators.minLength(4)]],
-    message: ['', [Validators.required, Validators.minLength(10)]]
-  });
+  nom = signal('');
+  email = signal('');
+  sujet = signal('');
+  message = signal('');
+  soumis = signal(false);
 
   isSubmitted = signal(false);
 
+  get nomValide(): boolean {
+    return this.nom().trim().length >= 2;
+  }
+
+  get emailValide(): boolean {
+    const email = this.email().trim();
+    return email.includes('@') && email.includes('.');
+  }
+
+  get sujetValide(): boolean {
+    return this.sujet().trim().length >= 4;
+  }
+
+  get messageValide(): boolean {
+    return this.message().trim().length >= 10;
+  }
+
+  get formValide(): boolean {
+    return this.nomValide && this.emailValide && this.sujetValide && this.messageValide;
+  }
+
   onSubmit() {
-    if (this.contactForm.valid) {
-      const { nom, email, sujet, message } = this.contactForm.value;
-      this.messageService.addMessage({ nom, email, sujet, message });
-      this.isSubmitted.set(true);
-    }
+    this.soumis.set(true);
+    if (!this.formValide) return;
+
+    this.messageService.addMessage({
+      nom: this.nom().trim(),
+      email: this.email().trim(),
+      sujet: this.sujet().trim(),
+      message: this.message().trim()
+    });
+    this.isSubmitted.set(true);
   }
 
   resetForm() {
-    this.contactForm.reset({ sujet: '' });
+    this.nom.set('');
+    this.email.set('');
+    this.sujet.set('');
+    this.message.set('');
+    this.soumis.set(false);
     this.isSubmitted.set(false);
   }
 }

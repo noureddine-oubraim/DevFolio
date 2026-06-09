@@ -11,7 +11,7 @@
 
       <!-- Skills Table -->
       <div class="table-container card">
-        @if (skills().length === 0) {
+        @if (skills.length === 0) {
           <div class="empty-table">
             <i class="fa-solid fa-code"></i>
             <p>Aucune compétence n'a été ajoutée pour le moment.</p>
@@ -27,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              @for (skill of skills(); track skill.id) {
+              @for (skill of skills; track skill.id) {
                 <tr>
                   <td>
                     <strong>{{ skill.nom }}</strong>

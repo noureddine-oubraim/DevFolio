@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { LowerCasePipe, NgClass, SlicePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CompetenceService } from '../../../services/competence.service';
@@ -33,21 +33,40 @@ export class CompetencesComponent {
     tool: ['UML & Modélisation', 'Git & GitHub', 'Agile / Jira', 'Docker', 'Algorithmique & Structures de données', 'Programmation système', 'Scrum', 'Kanban'],
   };
 
-  filteredSkills = computed(() => {
+  get filteredSkills() {
     const cat = this.activeCategory();
-    const all = this.competenceService.allSkills();
+    const all = this.competenceService.allSkills;
     if (cat === 'all') return all;
     const names = this.categoryMap[cat] || [];
     // Exact match only — prevents 'Java' from bleeding into 'JavaScript'
     return all.filter(s => names.some(n => s.nom.toLowerCase() === n.toLowerCase()));
-  });
+  }
 
-  totalSkills = computed(() => this.competenceService.allSkills().length);
-  advancedCount = computed(() => this.competenceService.allSkills().filter(s => s.niveau === 'Avancé').length);
-  intermediateCount = computed(() => this.competenceService.allSkills().filter(s => s.niveau === 'Intermédiaire').length);
-  beginnerCount = computed(() => this.competenceService.allSkills().filter(s => s.niveau === 'Débutant').length);
+  get totalSkills(): number {
+    return this.competenceService.allSkills.length;
+  }
 
-  softSkills = this.profileService.softSkills;
-  languages = this.profileService.spokenLanguages;
-  interests = this.profileService.interests;
+  get advancedCount(): number {
+    return this.competenceService.allSkills.filter(s => s.niveau === 'Avancé').length;
+  }
+
+  get intermediateCount(): number {
+    return this.competenceService.allSkills.filter(s => s.niveau === 'Intermédiaire').length;
+  }
+
+  get beginnerCount(): number {
+    return this.competenceService.allSkills.filter(s => s.niveau === 'Débutant').length;
+  }
+
+  get softSkills() {
+    return this.profileService.softSkills;
+  }
+
+  get languages() {
+    return this.profileService.spokenLanguages;
+  }
+
+  get interests() {
+    return this.profileService.interests;
+  }
 }

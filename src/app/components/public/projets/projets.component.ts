@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProjetService } from '../../../services/projet.service';
@@ -18,14 +18,14 @@ export class ProjetsComponent {
   
   selectedTech = signal<string>('');
 
-  filteredProjects = computed(() => {
+  get filteredProjects(): Projet[] {
     const tech = this.selectedTech();
-    const published = this.projetService.publishedProjects();
+    const published = this.projetService.publishedProjects;
     
     if (!tech) {
       return published;
     }
     
     return published.filter((p: Projet) => p.technologies.includes(tech));
-  });
+  }
 }

@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Message } from '../models/types';
 import { initialMessages } from '../data/mock-db';
 
@@ -11,8 +11,9 @@ export class MessageService {
   // State signal holding all messages
   private messages = signal<Message[]>(this.loadMessages());
 
-  // Computed signal for outside reading
-  public allMessages = computed(() => this.messages());
+  get allMessages(): Message[] {
+    return this.messages();
+  }
 
   constructor() {}
 

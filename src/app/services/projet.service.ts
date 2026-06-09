@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Projet } from '../models/types';
 import { initialProjects, PROJECTS_DB_VERSION } from '../data/mock-db';
 
@@ -10,8 +10,13 @@ export class ProjetService {
 
   private projects = signal<Projet[]>(this.loadProjects());
 
-  public allProjects = computed(() => this.projects());
-  public publishedProjects = computed(() => this.projects().filter(p => p.statut === 'Publié'));
+  get allProjects(): Projet[] {
+    return this.projects();
+  }
+
+  get publishedProjects(): Projet[] {
+    return this.projects().filter(p => p.statut === 'Publié');
+  }
 
   constructor() {}
 

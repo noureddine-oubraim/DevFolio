@@ -15,7 +15,9 @@ export class AdminSkillsComponent {
   private competenceService = inject(CompetenceService);
   private fb = inject(FormBuilder);
 
-  skills = this.competenceService.allSkills;
+  get skills(): Competence[] {
+    return this.competenceService.allSkills;
+  }
 
   skillForm: FormGroup = this.fb.group({
     nom:   ['', Validators.required],

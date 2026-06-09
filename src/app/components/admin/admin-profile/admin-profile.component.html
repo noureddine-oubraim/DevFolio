@@ -9,11 +9,11 @@
     <div class="card section-card">
       <h2><i class="fa-solid fa-file-pdf"></i> Mon CV (PDF)</h2>
       <div class="cv-upload-area">
-        @if (cvDataUrl()) {
+        @if (cvDataUrl) {
           <div class="cv-status success">
             <i class="fa-solid fa-check-circle"></i> Un CV est actuellement en ligne.
             <div class="cv-actions">
-              <a [href]="cvDataUrl()" download="Mon_CV.pdf" class="btn btn-outline btn-sm">
+              <a [href]="cvDataUrl" download="Mon_CV.pdf" class="btn btn-outline btn-sm">
                 <i class="fa-solid fa-download"></i> Tester
               </a>
               <button class="btn btn-danger btn-sm" (click)="deleteCv()">
@@ -44,7 +44,7 @@
         </div>
       </form>
       <div class="tags-list">
-        @for (skill of softSkills(); track skill) {
+        @for (skill of softSkills; track skill) {
           <div class="tag-item">
             <span>{{ skill }}</span>
             <button class="btn-icon text-danger" (click)="removeSoftSkill(skill)"><i class="fa-solid fa-times"></i></button>
@@ -63,7 +63,7 @@
         <button type="submit" class="btn btn-primary" [disabled]="langForm.invalid">Ajouter</button>
       </form>
       <div class="list-items">
-        @for (lang of spokenLanguages(); track lang.id) {
+        @for (lang of spokenLanguages; track lang.id) {
           <div class="list-item">
             <div class="item-info">
               <span class="item-icon">{{ lang.flag }}</span>
@@ -87,7 +87,7 @@
         <button type="submit" class="btn btn-primary" [disabled]="interestForm.invalid">Ajouter</button>
       </form>
       <div class="list-items">
-        @for (interest of interests(); track interest.id) {
+        @for (interest of interests; track interest.id) {
           <div class="list-item">
             <div class="item-info">
               <i [ngClass]="interest.icon" class="item-icon fa-fw"></i>

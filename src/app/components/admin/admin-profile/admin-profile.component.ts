@@ -15,10 +15,21 @@ export class AdminProfileComponent {
   private fb = inject(FormBuilder);
 
   // States
-  cvDataUrl = this.profileService.cvDataUrl;
-  spokenLanguages = this.profileService.spokenLanguages;
-  interests = this.profileService.interests;
-  softSkills = this.profileService.softSkills;
+  get cvDataUrl(): string | null {
+    return this.profileService.cvDataUrl;
+  }
+
+  get spokenLanguages(): SpokenLanguage[] {
+    return this.profileService.spokenLanguages;
+  }
+
+  get interests(): Interest[] {
+    return this.profileService.interests;
+  }
+
+  get softSkills(): string[] {
+    return this.profileService.softSkills;
+  }
 
   // Language Form
   langForm: FormGroup = this.fb.group({
@@ -66,13 +77,13 @@ export class AdminProfileComponent {
         id: Date.now(),
         ...this.langForm.value
       };
-      this.profileService.updateLanguages([...this.spokenLanguages(), newLang]);
+      this.profileService.updateLanguages([...this.spokenLanguages, newLang]);
       this.langForm.reset({ flag: '', name: '', level: '' });
     }
   }
 
   removeLanguage(id: number) {
-    this.profileService.updateLanguages(this.spokenLanguages().filter(l => l.id !== id));
+    this.profileService.updateLanguages(this.spokenLanguages.filter(l => l.id !== id));
   }
 
   // Interests CRUD
@@ -82,25 +93,25 @@ export class AdminProfileComponent {
         id: Date.now(),
         ...this.interestForm.value
       };
-      this.profileService.updateInterests([...this.interests(), newInterest]);
+      this.profileService.updateInterests([...this.interests, newInterest]);
       this.interestForm.reset({ icon: 'fa-solid fa-star', label: '' });
     }
   }
 
   removeInterest(id: number) {
-    this.profileService.updateInterests(this.interests().filter(i => i.id !== id));
+    this.profileService.updateInterests(this.interests.filter(i => i.id !== id));
   }
 
   // Soft Skills CRUD
   addSoftSkill() {
     if (this.softSkillForm.valid) {
       const skill = this.softSkillForm.value.skill;
-      this.profileService.updateSoftSkills([...this.softSkills(), skill]);
+      this.profileService.updateSoftSkills([...this.softSkills, skill]);
       this.softSkillForm.reset({ skill: '' });
     }
   }
 
   removeSoftSkill(skill: string) {
-    this.profileService.updateSoftSkills(this.softSkills().filter(s => s !== skill));
+    this.profileService.updateSoftSkills(this.softSkills.filter(s => s !== skill));
   }
 }

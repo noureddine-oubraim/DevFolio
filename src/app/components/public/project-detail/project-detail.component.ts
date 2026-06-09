@@ -1,5 +1,5 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Component, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ProjetService } from '../../../services/projet.service';
 import { Projet } from '../../../models/types';
@@ -11,16 +11,12 @@ import { Projet } from '../../../models/types';
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css'
 })
-export class ProjectDetailComponent implements OnInit {
-  private route        = inject(ActivatedRoute);
+export class ProjectDetailComponent {
   private projetService = inject(ProjetService);
 
-  projet = signal<Projet | undefined>(undefined);
+  id = input<string>();
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      this.projet.set(id ? this.projetService.getProjectById(+id) : undefined);
-    });
+  get projet(): Projet | undefined {
+    return this.projetService.getProjectById(+(this.id() ?? 0));
   }
 }
