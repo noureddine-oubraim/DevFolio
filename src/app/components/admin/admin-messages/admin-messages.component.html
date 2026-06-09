@@ -55,12 +55,6 @@
             </div>
             <div class="view-body">
               <p>{{ selectedMessage()?.message }}</p>
-              @if (selectedMessage()?.reponse) {
-                <div class="response-block" style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary); border-radius: 0.5rem;">
-                  <h4 style="margin-top: 0; margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--text-primary);"><i class="fa-solid fa-reply"></i> Ma Réponse</h4>
-                  <p style="margin: 0; font-style: italic;">{{ selectedMessage()?.reponse }}</p>
-                </div>
-              }
             </div>
           } @else {
             <div class="empty-view">

@@ -16,7 +16,7 @@ export class ContactComponent {
   contactForm: FormGroup = this.fb.group({
     nom:     ['', [Validators.required, Validators.minLength(2)]],
     email:   ['', [Validators.required, Validators.email]],
-    sujet:   ['Collaboration sur un projet Angular', [Validators.required, Validators.minLength(4)]],
+    sujet:   ['', [Validators.required, Validators.minLength(4)]],
     message: ['', [Validators.required, Validators.minLength(10)]]
   });
 
@@ -31,7 +31,7 @@ export class ContactComponent {
   }
 
   resetForm() {
-    this.contactForm.reset({ sujet: 'Collaboration sur un projet Angular' });
+    this.contactForm.reset({ sujet: '' });
     this.isSubmitted.set(false);
   }
 }

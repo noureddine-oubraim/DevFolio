@@ -23,12 +23,12 @@ export class CompetencesComponent {
     { key: 'tool', label: 'Outils & Méthodes', icon: 'fa-solid fa-screwdriver-wrench' },
   ];
 
-  // Category mapping
+  // Category mapping – properly classifying each skill
   private categoryMap: Record<string, string[]> = {
-    framework: ['Angular', 'JavaScript / React', 'Node.js', 'HTML / CSS / PHP'],
-    language: ['Java', 'C / C++', 'TypeScript', 'Powershell', 'Algorithmique & Structures de données', 'Programmation système'],
-    database: ['Bases de données / SQL'],
-    tool: ['UML & Modélisation', 'Git & GitHub', 'Agile / Jira', 'Docker'],
+    framework: ['Angular', 'JavaScript / React', 'Node.js', 'Spring Boot'],
+    language: ['Java', 'C / C++', 'TypeScript', 'HTML / CSS / PHP', 'Powershell'],
+    database: ['Bases de données / SQL', 'MongoDB'],
+    tool: ['UML & Modélisation', 'Git & GitHub', 'Agile / Jira', 'Docker', 'Algorithmique & Structures de données', 'Programmation système', 'Scrum', 'Kanban'],
   };
 
   filteredSkills = computed(() => {
@@ -51,13 +51,15 @@ export class CompetencesComponent {
 
   languages = [
     { flag: '🇲🇦', name: 'Arabe', level: 'Langue maternelle' },
-    { flag: '🇫🇷', name: 'Français', level: 'Intermédiaire' },
-    { flag: '🇬🇧', name: 'Anglais', level: 'Intermédiaire' },
+    { flag: '🇫🇷', name: 'Français', level: 'Avancé' },
+    { flag: '🇬🇧', name: 'Anglais', level: 'Avancé' },
   ];
 
   interests = [
-    { icon: 'fa-regular fa-futbol', label: 'Football' },
-    { icon: 'fa-solid fa-person-running', label: 'Course à pied' },
-    { icon: 'fa-solid fa-dumbbell', label: 'Musculation' }
+    { icon: 'fa-solid fa-microphone', label: 'Chant' },
+    { icon: 'fa-solid fa-book-open-reader', label: 'Lecture' },
+    { icon: 'fa-solid fa-plane-departure', label: 'Voyage' },
+    { icon: 'fa-solid fa-palette', label: 'Art & Créativité' },
+    { icon: 'fa-solid fa-music', label: 'Musique' }
   ];
 }

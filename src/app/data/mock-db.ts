@@ -7,7 +7,7 @@ export const initialProjects: Projet[] = [
     description: 'Application web permettant aux clients de commander des impressions 3D en ligne. Interface intuitive pour l\'upload de modèles 3D, choix des matériaux et tarification en temps réel. Intègre un dashboard complet de gestion des commandes et suivi de production.',
     technologies: ['React', 'NestJS', 'TypeScript', 'Tailwind CSS', 'SQL'],
     statut: 'Publié',
-    github: 'https://github.com/noureddineoubraim1-cmyk/click2print',
+    github: 'https://github.com/chakrisana/click2print',
     date: '2026-04-15'
   },
   {
@@ -16,7 +16,7 @@ export const initialProjects: Projet[] = [
     description: 'Plateforme moderne de marketplace pour les outils d\'intelligence artificielle, construite sur une architecture découplée React + Vite / PHP natif. Permet de rechercher, évaluer et commenter des outils d\'IA selon différents critères, avec possibilité de suggérer de nouveaux outils.',
     technologies: ['React', 'Vite', 'PHP', 'MySQL', 'Tailwind CSS'],
     statut: 'Publié',
-    github: 'https://github.com/noureddineoubraim1-cmyk/xploreia',
+    github: 'https://github.com/chakrisana/xploreia',
     date: '2026-03-10'
   },
   {
@@ -25,7 +25,7 @@ export const initialProjects: Projet[] = [
     description: 'Portfolio de développeur moderne conçu avec Angular. Présente de manière élégante les projets académiques et professionnels, les compétences techniques et les expériences. Back-office protégé avec authentification simulée et CRUD complet.',
     technologies: ['Angular', 'TypeScript', 'CSS', 'RxJS'],
     statut: 'Publié',
-    github: 'https://github.com/noureddineoubraim1-cmyk/devfolio',
+    github: 'https://github.com/chakrisana/devfolio',
     date: '2026-06-05'
   },
   {
@@ -34,7 +34,7 @@ export const initialProjects: Projet[] = [
     description: 'Application de gestion de stock pour PME avec alertes automatiques de rupture, rapports d\'inventaire exportables en PDF/Excel et tableau de bord analytique. Interface multi-utilisateurs avec gestion des rôles.',
     technologies: ['Java', 'JavaFX', 'SQL', 'PostgreSQL'],
     statut: 'Publié',
-    github: 'https://github.com/noureddineoubraim1-cmyk/geststock-pro',
+    github: 'https://github.com/chakrisana/geststock-pro',
     date: '2025-12-20'
   },
   {
@@ -43,7 +43,7 @@ export const initialProjects: Projet[] = [
     description: 'Outil de gestion de tâches collaboratif inspiré de Kanban. Permet la création de boards, colonnes et cartes avec drag-and-drop, attribution aux membres d\'équipe et suivi des deadlines en temps réel.',
     technologies: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
     statut: 'Publié',
-    github: 'https://github.com/noureddineoubraim1-cmyk/taskflow',
+    github: 'https://github.com/chakrisana/taskflow',
     date: '2025-10-15'
   },
   {
@@ -52,7 +52,7 @@ export const initialProjects: Projet[] = [
     description: 'Outil pédagogique de visualisation d\'algorithmes de tri et de recherche. Animations fluides pas-à-pas avec contrôle de vitesse, comparaison de complexités et mode quiz interactif pour l\'apprentissage.',
     technologies: ['JavaScript', 'HTML', 'CSS', 'C++'],
     statut: 'Publié',
-    github: 'https://github.com/noureddineoubraim1-cmyk/algovisualizer',
+    github: 'https://github.com/chakrisana/algovisualizer',
     date: '2025-07-05'
   },
   {
@@ -61,7 +61,7 @@ export const initialProjects: Projet[] = [
     description: 'Application de suivi budgétaire personnel avec catégorisation automatique des dépenses, graphiques interactifs et alertes de dépassement de budget. Export des données en CSV et synchronisation cloud légère.',
     technologies: ['Angular', 'TypeScript', 'PHP', 'MySQL'],
     statut: 'Brouillon',
-    github: 'https://github.com/noureddineoubraim1-cmyk/smartbudget',
+    github: 'https://github.com/chakrisana/smartbudget',
     date: '2026-02-10'
   },
   {
@@ -70,7 +70,7 @@ export const initialProjects: Projet[] = [
     description: 'Outil de monitoring système léger écrit en C/Powershell permettant de surveiller l\'utilisation CPU, mémoire et disque, avec alertes configurables et logs rotatives. Interface CLI ergonomique.',
     technologies: ['C', 'Powershell', 'Bash'],
     statut: 'Publié',
-    github: 'https://github.com/noureddineoubraim1-cmyk/sysmonitor',
+    github: 'https://github.com/chakrisana/sysmonitor',
     date: '2025-05-20'
   },
   {
@@ -79,7 +79,7 @@ export const initialProjects: Projet[] = [
     description: 'Plateforme d\'apprentissage en ligne avec streaming vidéo, quiz interactifs et système de progression. Intégration de paiements Stripe et gestion des certificats automatisée.',
     technologies: ['Angular', 'Node.js', 'Express', 'MongoDB'],
     statut: 'Brouillon',
-    github: 'https://github.com/noureddineoubraim1-cmyk/elearning',
+    github: 'https://github.com/chakrisana/elearning',
     date: '2026-05-01'
   }
 ];
@@ -186,6 +186,18 @@ export const initialSkills: Competence[] = [
     nom: 'MongoDB',
     niveau: 'Intermédiaire',
     icone: 'fa-solid fa-leaf'
+  },
+  {
+    id: 18,
+    nom: 'Scrum',
+    niveau: 'Intermédiaire',
+    icone: 'fa-solid fa-rotate'
+  },
+  {
+    id: 19,
+    nom: 'Kanban',
+    niveau: 'Avancé',
+    icone: 'fa-solid fa-table-columns'
   }
 ];
 
@@ -238,9 +250,8 @@ export const initialMessages: Message[] = [
     nom: 'Sofia Benali',
     email: 'sofia.benali@techcorp.ma',
     sujet: 'Collaboration sur un projet React',
-    message: 'Bonjour Noureddine, j\'ai découvert votre portfolio et je suis impressionnée par la qualité de vos projets. Nous recherchons un développeur React pour une mission de 3 mois sur notre plateforme e-commerce. Seriez-vous disponible pour un entretien cette semaine ?',
-    date: '06/06/2026 à 14:32',
-    reponse: 'Bonjour Sofia, merci pour votre message ! Je suis effectivement disponible pour un entretien cette semaine. Que diriez-vous de jeudi à 10h ? Cordialement, Noureddine.'
+    message: 'Bonjour Chakri Sana, j\'ai découvert votre portfolio et je suis impressionnée par la qualité de vos projets. Nous recherchons un développeur React pour une mission de 3 mois sur notre plateforme e-commerce. Seriez-vous disponible pour un entretien cette semaine ?',
+    date: '06/06/2026 à 14:32'
   },
   {
     id: 2,
@@ -249,7 +260,6 @@ export const initialMessages: Message[] = [
     sujet: 'Opportunité freelance – Angular Dashboard',
     message: 'Salut ! Je gère une startup fintech à Casablanca et nous avons besoin d\'un développeur Angular pour construire un dashboard de reporting financier. Budget prévu : 15 000 MAD. Est-ce que vous êtes disponible et intéressé ?',
     date: '04/06/2026 à 09:15',
-    reponse: 'Salut Mehdi, merci pour la proposition. Le projet a l\'air très intéressant ! Pouvons-nous planifier un appel pour discuter plus en détail des spécifications techniques ?'
   },
   {
     id: 3,
@@ -257,8 +267,7 @@ export const initialMessages: Message[] = [
     email: 'amina.tazi@university.ac.ma',
     sujet: 'Question sur votre projet XploreIA',
     message: 'Bonjour, je suis étudiante en master IA à Mohammedia. J\'ai vu votre projet XploreIA et je voudrais comprendre comment vous avez architecturé la partie recherche et filtrage. Pourriez-vous partager quelques détails techniques ?',
-    date: '01/06/2026 à 16:45',
-    reponse: 'Bonjour Amina, aucun souci ! La partie recherche utilise principalement des filtres dynamiques combinés sur le front-end React, tandis que la base de données effectue les requêtes principales. Je t\'invite à consulter le code source sur mon GitHub, j\'y ai laissé des commentaires détaillés.'
+    date: '01/06/2026 à 16:45'
   }
 ];
 

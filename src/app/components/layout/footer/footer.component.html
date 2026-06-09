@@ -1,9 +1,28 @@
     <footer class="footer">
-      <div class="container footer-content">
-        <p class="copyright" (dblclick)="goToAdmin()" style="cursor: default;" title="Â© 2026 DevFolio">Â© 2026 DevFolio. Built for Developers.</p>
-        <div class="footer-links">
-          <a href="https://github.com/noureddineoubraim1-cmyk" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="https://www.linkedin.com/in/noureddine-oubraim-0004a7311/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <span class="footer-logo">DevFolio<span class="accent">.</span></span>
+          <p class="footer-tagline">Portfolio professionnel de Chakri Sana. Conçu avec Angular.</p>
         </div>
+        <div class="footer-nav">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a routerLink="/accueil" routerLinkActive="active">Accueil</a></li>
+            <li><a routerLink="/projets" routerLinkActive="active">Projets</a></li>
+            <li><a routerLink="/competences" routerLinkActive="active">Compétences</a></li>
+            <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Me suivre</h4>
+          <div class="footer-links">
+            <a href="https://github.com/chakrisana" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/chakri-sana/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:ChakriSana@gmail.com" aria-label="E-mail"><i class="fa-regular fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p class="copyright" (dblclick)="goToAdmin()" style="cursor: default;">&copy; 2026 DevFolio &mdash; Chakri Sana. Tous droits réservés.</p>
       </div>
     </footer>

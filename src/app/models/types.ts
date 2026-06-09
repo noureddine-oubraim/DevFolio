@@ -22,7 +22,6 @@ export interface Message {
   sujet: string;
   message: string;
   date: string;
-  reponse?: string;
 }
 
 export interface Experience {
