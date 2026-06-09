@@ -8,7 +8,11 @@ export const initialProjects: Projet[] = [
     technologies: ['React', 'NestJS', 'TypeScript', 'Tailwind CSS', 'SQL'],
     statut: 'Publié',
     github: 'https://github.com/chakrisana/click2print',
-    date: '2026-04-15'
+    date: '2026-04-15',
+    contexte: 'Projet académique de fin d\'année visant à digitaliser le processus de commande d\'impression 3D pour un atelier local.',
+    role: 'Développeur Full-Stack (Lead Tech)',
+    duree: '3 mois',
+    defis: ['Optimisation du rendu 3D dans le navigateur', 'Gestion des paiements sécurisés', 'Architecture de la base de données pour les commandes complexes']
   },
   {
     id: 2,
@@ -17,7 +21,11 @@ export const initialProjects: Projet[] = [
     technologies: ['React', 'Vite', 'PHP', 'MySQL', 'Tailwind CSS'],
     statut: 'Publié',
     github: 'https://github.com/chakrisana/xploreia',
-    date: '2026-03-10'
+    date: '2026-03-10',
+    contexte: 'Création d\'un annuaire communautaire pour recenser et évaluer les outils d\'Intelligence Artificielle en pleine explosion.',
+    role: 'Développeur Frontend React',
+    duree: '2 mois',
+    defis: ['Intégration d\'une recherche en temps réel', 'Système de filtrage multicritères performant', 'Responsive design pour mobile']
   },
   {
     id: 3,
@@ -26,7 +34,11 @@ export const initialProjects: Projet[] = [
     technologies: ['Angular', 'TypeScript', 'CSS', 'RxJS'],
     statut: 'Publié',
     github: 'https://github.com/chakrisana/devfolio',
-    date: '2026-06-05'
+    date: '2026-06-05',
+    contexte: 'Développement d\'un portfolio personnel pour présenter mes compétences et projets de manière professionnelle et dynamique.',
+    role: 'Développeur Full-Stack / Concepteur',
+    duree: '1 mois',
+    defis: ['Mise en place d\'une architecture Angular 21+ Zoneless', 'Gestion de l\'état avec les Signals', 'Création d\'un back-office sur mesure avec authentification simulée']
   },
   {
     id: 4,
@@ -35,7 +47,11 @@ export const initialProjects: Projet[] = [
     technologies: ['Java', 'JavaFX', 'SQL', 'PostgreSQL'],
     statut: 'Publié',
     github: 'https://github.com/chakrisana/geststock-pro',
-    date: '2025-12-20'
+    date: '2025-12-20',
+    contexte: 'Projet universitaire visant à informatiser la gestion de stock d\'une PME locale qui utilisait encore des feuilles Excel.',
+    role: 'Développeur Backend Java',
+    duree: '4 mois',
+    defis: ['Conception d\'une architecture MVC propre en JavaFX', 'Export PDF/Excel avec Apache POI', 'Gestion transactionnelle et intégrité des données']
   },
   {
     id: 5,
@@ -44,7 +60,11 @@ export const initialProjects: Projet[] = [
     technologies: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
     statut: 'Publié',
     github: 'https://github.com/chakrisana/taskflow',
-    date: '2025-10-15'
+    date: '2025-10-15',
+    contexte: 'Projet personnel pour explorer le drag-and-drop natif HTML5 et les WebSockets pour la collaboration temps réel.',
+    role: 'Développeur Full-Stack',
+    duree: '2 mois',
+    defis: ['Drag-and-drop fluide entre colonnes', 'Synchronisation en temps réel via WebSockets', 'Système de notifications pour les deadlines']
   },
   {
     id: 6,
@@ -53,7 +73,11 @@ export const initialProjects: Projet[] = [
     technologies: ['JavaScript', 'HTML', 'CSS', 'C++'],
     statut: 'Publié',
     github: 'https://github.com/chakrisana/algovisualizer',
-    date: '2025-07-05'
+    date: '2025-07-05',
+    contexte: 'Projet pédagogique pour aider les étudiants en algorithmique à visualiser et comprendre les algorithmes de tri.',
+    role: 'Développeur Frontend',
+    duree: '1 mois',
+    defis: ['Animation pas-à-pas avec vitesse configurable', 'Comparaison visuelle de complexités O(n)', 'Mode quiz interactif avec scoring']
   },
   {
     id: 7,
@@ -62,7 +86,11 @@ export const initialProjects: Projet[] = [
     technologies: ['Angular', 'TypeScript', 'PHP', 'MySQL'],
     statut: 'Brouillon',
     github: 'https://github.com/chakrisana/smartbudget',
-    date: '2026-02-10'
+    date: '2026-02-10',
+    contexte: 'Application personnelle pour gérer mes propres finances et expérimenter Angular avec un backend PHP.',
+    role: 'Développeur Full-Stack',
+    duree: '2 mois (en cours)',
+    defis: ['Graphiques interactifs avec Chart.js', 'API RESTful PHP natif', 'Système d\'alertes par seuil de dépenses']
   },
   {
     id: 8,
@@ -71,7 +99,11 @@ export const initialProjects: Projet[] = [
     technologies: ['C', 'Powershell', 'Bash'],
     statut: 'Publié',
     github: 'https://github.com/chakrisana/sysmonitor',
-    date: '2025-05-20'
+    date: '2025-05-20',
+    contexte: 'Travail pratique de programmation système pour explorer les appels systèmes Unix/Windows.',
+    role: 'Développeur Système',
+    duree: '3 semaines',
+    defis: ['Portabilité entre Windows et Linux', 'Parsing efficace de /proc sous Linux', 'Rotation automatique des fichiers de logs']
   },
   {
     id: 9,
@@ -80,7 +112,11 @@ export const initialProjects: Projet[] = [
     technologies: ['Angular', 'Node.js', 'Express', 'MongoDB'],
     statut: 'Brouillon',
     github: 'https://github.com/chakrisana/elearning',
-    date: '2026-05-01'
+    date: '2026-05-01',
+    contexte: 'Projet ambitieux de plateforme e-learning avec monétisation, inspiré par Udemy et Coursera.',
+    role: 'Architecte & Développeur Full-Stack',
+    duree: '3 mois (en cours)',
+    defis: ['Architecture microservices avec Express', 'Intégration du paiement Stripe', 'Génération automatique de certificats PDF']
   }
 ];
 
@@ -93,7 +129,7 @@ export const initialSkills: Competence[] = [
   },
   {
     id: 2,
-    nom: 'JavaScript / React',
+    nom: 'React',
     niveau: 'Avancé',
     icone: 'fa-brands fa-react'
   },

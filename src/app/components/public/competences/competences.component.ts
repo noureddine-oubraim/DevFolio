@@ -2,6 +2,7 @@ import { Component, inject, signal, computed } from '@angular/core';
 import { LowerCasePipe, NgClass, SlicePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CompetenceService } from '../../../services/competence.service';
+import { ProfileService } from '../../../services/profile.service';
 
 @Component({
   selector: 'app-competences',
@@ -12,6 +13,7 @@ import { CompetenceService } from '../../../services/competence.service';
 })
 export class CompetencesComponent {
   private competenceService = inject(CompetenceService);
+  private profileService = inject(ProfileService);
 
   activeCategory = signal<string>('all');
 
@@ -25,10 +27,10 @@ export class CompetencesComponent {
 
   // Category mapping – properly classifying each skill
   private categoryMap: Record<string, string[]> = {
-    framework: ['Angular', 'JavaScript / React', 'Node.js', 'Spring Boot'],
-    language: ['Java', 'C / C++', 'TypeScript', 'HTML / CSS / PHP', 'Powershell'],
+    framework: ['Angular', 'React', 'Spring Boot', 'Node.js'],
+    language: ['Java', 'C / C++', 'TypeScript', 'HTML / CSS / PHP', 'Powershell', 'Programmation système', 'Algorithmique & Structures de données'],
     database: ['Bases de données / SQL', 'MongoDB'],
-    tool: ['UML & Modélisation', 'Git & GitHub', 'Agile / Jira', 'Docker', 'Algorithmique & Structures de données', 'Programmation système', 'Scrum', 'Kanban'],
+    tool: ['UML & Modélisation', 'Git & GitHub', 'Agile / Jira', 'Docker', 'Scrum', 'Kanban'],
   };
 
   filteredSkills = computed(() => {
@@ -44,22 +46,7 @@ export class CompetencesComponent {
   intermediateCount = computed(() => this.competenceService.allSkills().filter(s => s.niveau === 'Intermédiaire').length);
   beginnerCount = computed(() => this.competenceService.allSkills().filter(s => s.niveau === 'Débutant').length);
 
-  softSkills = [
-    'Organisation', 'Communication', 'Travail d\'équipe', 
-    'Respect des délais', 'Esprit critique'
-  ];
-
-  languages = [
-    { flag: '🇲🇦', name: 'Arabe', level: 'Langue maternelle' },
-    { flag: '🇫🇷', name: 'Français', level: 'Avancé' },
-    { flag: '🇬🇧', name: 'Anglais', level: 'Avancé' },
-  ];
-
-  interests = [
-    { icon: 'fa-solid fa-microphone', label: 'Chant' },
-    { icon: 'fa-solid fa-book-open-reader', label: 'Lecture' },
-    { icon: 'fa-solid fa-plane-departure', label: 'Voyage' },
-    { icon: 'fa-solid fa-palette', label: 'Art & Créativité' },
-    { icon: 'fa-solid fa-music', label: 'Musique' }
-  ];
+  softSkills = this.profileService.softSkills;
+  languages = this.profileService.spokenLanguages;
+  interests = this.profileService.interests;
 }

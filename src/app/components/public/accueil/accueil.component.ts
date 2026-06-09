@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { CompetenceService } from '../../../services/competence.service';
 import { ProjetService } from '../../../services/projet.service';
 import { ExperienceService } from '../../../services/experience.service';
+import { ProfileService } from '../../../services/profile.service';
 import { CommonModule, NgClass } from '@angular/common';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 
@@ -17,4 +18,5 @@ export class AccueilComponent {
   competenceService = inject(CompetenceService);
   projetService = inject(ProjetService);
   experienceService = inject(ExperienceService);
+  profileService = inject(ProfileService);
 }

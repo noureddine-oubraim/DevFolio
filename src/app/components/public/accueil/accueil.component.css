@@ -10,6 +10,15 @@
     .hero-actions {
       display: flex;
       gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .cv-btn {
+      border-color: #ef4444 !important;
+      color: #ef4444 !important;
+    }
+    .cv-btn:hover {
+      background-color: #ef4444 !important;
+      color: white !important;
     }
     
     .section-title {

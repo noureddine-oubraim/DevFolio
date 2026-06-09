@@ -40,6 +40,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', loadComponent: () => import('./components/admin/admin-dashboard/admin-dashboard.component').then(m => m.AdminDashboardComponent) },
+      { path: 'profil', loadComponent: () => import('./components/admin/admin-profile/admin-profile.component').then(m => m.AdminProfileComponent) },
       { path: 'projets', loadComponent: () => import('./components/admin/admin-projects/admin-projects.component').then(m => m.AdminProjectsComponent) },
       { path: 'competences', loadComponent: () => import('./components/admin/admin-skills/admin-skills.component').then(m => m.AdminSkillsComponent) },
       { path: 'messages', loadComponent: () => import('./components/admin/admin-messages/admin-messages.component').then(m => m.AdminMessagesComponent) },

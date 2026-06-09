@@ -6,6 +6,10 @@ export interface Projet {
   statut: 'Publié' | 'Brouillon';
   github?: string;
   date?: string;
+  contexte?: string;
+  role?: string;
+  duree?: string;
+  defis?: string[];
 }
 
 export interface Competence {

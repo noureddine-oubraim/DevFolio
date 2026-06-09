@@ -14,32 +14,69 @@
                 <span class="project-date">{{ project()?.date | date:'longDate':'':'fr' }}</span>
               }
             </div>
-            <h1>{{ project()?.titre }}</h1>
+            <div class="header-title-row" style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+              <h1 style="margin-bottom: 0;">{{ project()?.titre }}</h1>
+              @if (project()?.github) {
+                <a [href]="project()?.github" target="_blank" class="btn btn-outline" style="white-space: nowrap;">
+                  <i class="fa-brands fa-github"></i> Code source
+                </a>
+              }
+            </div>
           </div>
           
           <div class="project-meta">
-            <div class="meta-section">
-              <h3>Technologies Utilisées</h3>
-              <div class="project-tags">
-                @for (tech of project()?.technologies; track tech) {
-                  <span class="tech-tag">{{ tech }}</span>
-                }
+            @if (project()?.technologies?.length) {
+              <div class="meta-section">
+                <h3><i class="fa-solid fa-code"></i> Technologies Utilisées</h3>
+                <div class="project-tags">
+                  @for (tech of project()?.technologies; track tech) {
+                    <span class="tech-tag">{{ tech }}</span>
+                  }
+                </div>
               </div>
+            }
+
+            <div class="meta-details-grid">
+              @if (project()?.role) {
+                <div class="meta-item">
+                  <h4><i class="fa-solid fa-user-tie"></i> Mon Rôle</h4>
+                  <p>{{ project()?.role }}</p>
+                </div>
+              }
+              @if (project()?.duree) {
+                <div class="meta-item">
+                  <h4><i class="fa-solid fa-clock"></i> Durée</h4>
+                  <p>{{ project()?.duree }}</p>
+                </div>
+              }
             </div>
           </div>
           
           <div class="project-content">
-            <h3>Description du projet</h3>
-            <p>{{ project()?.description }}</p>
+            @if (project()?.contexte) {
+              <div class="content-section">
+                <h3><i class="fa-solid fa-crosshairs"></i> Contexte du projet</h3>
+                <p>{{ project()?.contexte }}</p>
+              </div>
+            }
+
+            <div class="content-section">
+              <h3><i class="fa-solid fa-align-left"></i> Description</h3>
+              <p>{{ project()?.description }}</p>
+            </div>
+
+            @if (project()?.defis?.length) {
+              <div class="content-section">
+                <h3><i class="fa-solid fa-mountain-sun"></i> Défis techniques relevés</h3>
+                <ul class="defis-list">
+                  @for (defi of project()?.defis; track defi) {
+                    <li><i class="fa-solid fa-check"></i> {{ defi }}</li>
+                  }
+                </ul>
+              </div>
+            }
           </div>
 
-          @if (project()?.github) {
-            <div class="project-actions">
-              <a [href]="project()?.github" target="_blank" class="btn btn-primary github-btn">
-                <i class="fa-brands fa-github"></i> Consulter le code sur GitHub
-              </a>
-            </div>
-          }
         </div>
       } @else {
         <div class="empty-state">

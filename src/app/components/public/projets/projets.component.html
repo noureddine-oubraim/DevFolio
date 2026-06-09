@@ -1,19 +1,23 @@
     <div class="container page-container">
       <div class="page-header">
-        <h1>All Projects</h1>
-        <p>A collection of my recent work, side projects, and experiments.</p>
+        <h1>Tous les Projets</h1>
+        <p>Une collection de mes travaux récents, projets académiques et expérimentations.</p>
       </div>
-      <div class="filter-bar card">
-        <div class="input-group" style="margin-bottom: 0;">
-          <label for="techFilter">Filter by Technology:</label>
-          <select id="techFilter" class="input-control"
-                  [value]="selectedTech()"
-                  (change)="selectedTech.set($any($event.target).value)">
-            <option value="">All Technologies</option>
-            @for (tech of projetService.getAllTechnologies(); track tech) {
-              <option [value]="tech">{{ tech }}</option>
-            }
-          </select>
+      <div class="filter-section">
+        <h3 class="filter-title">Filtrer par technologie :</h3>
+        <div class="tech-filter-chips">
+          <button class="tech-chip" 
+                  [class.active]="selectedTech() === ''"
+                  (click)="selectedTech.set('')">
+            Toutes
+          </button>
+          @for (tech of projetService.getAllTechnologies(); track tech) {
+            <button class="tech-chip"
+                    [class.active]="selectedTech() === tech"
+                    (click)="selectedTech.set(tech)">
+              {{ tech }}
+            </button>
+          }
         </div>
       </div>
 
@@ -28,15 +32,15 @@
             <h3>{{ project.titre }}</h3>
             <p class="project-desc">{{ project.description | truncate:120 }}</p>
             <a [routerLink]="['/projet', project.id]" class="project-link">
-              View Details <i class="fa-solid fa-arrow-right"></i>
+              Voir les détails <i class="fa-solid fa-arrow-right"></i>
             </a>
           </div>
         } @empty {
           <div class="empty-state">
             <i class="fa-regular fa-folder-open"></i>
-            <h3>No projects found</h3>
-            <p>Try adjusting your filter to see more projects.</p>
-            <button class="btn btn-outline" (click)="selectedTech.set('')">Clear Filter</button>
+            <h3>Aucun projet trouvé</h3>
+            <p>Essayez de modifier votre filtre pour voir d'autres projets.</p>
+            <button class="btn btn-outline" (click)="selectedTech.set('')">Effacer le filtre</button>
           </div>
         }
       </div>

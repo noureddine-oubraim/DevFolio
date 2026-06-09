@@ -10,6 +10,11 @@
           <div class="hero-actions">
             <a routerLink="/projets" class="btn btn-primary">Voir les Projets</a>
             <a routerLink="/contact" class="btn btn-outline">Me Contacter</a>
+            @if (profileService.cvDataUrl()) {
+              <a [href]="profileService.cvDataUrl()" download="CV_Chakri_Sana.pdf" class="btn btn-outline cv-btn">
+                <i class="fa-solid fa-file-pdf"></i> Télécharger mon CV
+              </a>
+            }
           </div>
         </div>
       </div>

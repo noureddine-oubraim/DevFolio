@@ -92,7 +92,7 @@
             <div class="extra-card card">
               <h3><i class="fa-solid fa-star"></i> Qualités Personnelles</h3>
               <div class="tags-wrap">
-                @for (q of softSkills; track q) {
+                @for (q of softSkills(); track q) {
                   <span class="extra-tag">{{ q }}</span>
                 }
               </div>
@@ -101,7 +101,7 @@
             <div class="extra-card card">
               <h3><i class="fa-solid fa-language"></i> Langues</h3>
               <div class="lang-list">
-                @for (lang of languages; track lang.name) {
+                @for (lang of languages(); track lang.name) {
                   <div class="lang-item">
                     <span class="lang-flag">{{ lang.flag }}</span>
                     <div class="lang-info">
@@ -116,7 +116,7 @@
             <div class="extra-card card">
               <h3><i class="fa-solid fa-heart"></i> Centres d'Intérêt</h3>
               <div class="interests-grid">
-                @for (interest of interests; track interest.label) {
+                @for (interest of interests(); track interest.label) {
                   <div class="interest-item">
                     <i [ngClass]="interest.icon"></i>
                     <span>{{ interest.label }}</span>

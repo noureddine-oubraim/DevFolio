@@ -1,0 +1,102 @@
+<div class="admin-profile-container">
+  <div class="page-header">
+    <h1><i class="fa-solid fa-id-card"></i> Gestion du Profil</h1>
+    <p>Gérez votre CV, vos langues, centres d'intérêt et qualités personnelles.</p>
+  </div>
+
+  <div class="grid-layout">
+    <!-- CV Section -->
+    <div class="card section-card">
+      <h2><i class="fa-solid fa-file-pdf"></i> Mon CV (PDF)</h2>
+      <div class="cv-upload-area">
+        @if (cvDataUrl()) {
+          <div class="cv-status success">
+            <i class="fa-solid fa-check-circle"></i> Un CV est actuellement en ligne.
+            <div class="cv-actions">
+              <a [href]="cvDataUrl()" download="Mon_CV.pdf" class="btn btn-outline btn-sm">
+                <i class="fa-solid fa-download"></i> Tester
+              </a>
+              <button class="btn btn-danger btn-sm" (click)="deleteCv()">
+                <i class="fa-solid fa-trash"></i> Supprimer
+              </button>
+            </div>
+          </div>
+        } @else {
+          <div class="cv-status warning">
+            <i class="fa-solid fa-exclamation-circle"></i> Aucun CV n'est en ligne.
+          </div>
+        }
+        
+        <div class="upload-control">
+          <label for="cvUpload" class="upload-label">Importer un nouveau CV (PDF uniquement)</label>
+          <input type="file" id="cvUpload" accept="application/pdf" (change)="onFileSelected($event)" class="file-input">
+        </div>
+      </div>
+    </div>
+
+    <!-- Soft Skills Section -->
+    <div class="card section-card">
+      <h2><i class="fa-solid fa-star"></i> Qualités Personnelles</h2>
+      <form [formGroup]="softSkillForm" (ngSubmit)="addSoftSkill()" class="add-form">
+        <div class="input-group">
+          <input type="text" formControlName="skill" placeholder="Ex: Esprit d'équipe" class="input-control">
+          <button type="submit" class="btn btn-primary" [disabled]="softSkillForm.invalid">Ajouter</button>
+        </div>
+      </form>
+      <div class="tags-list">
+        @for (skill of softSkills(); track skill) {
+          <div class="tag-item">
+            <span>{{ skill }}</span>
+            <button class="btn-icon text-danger" (click)="removeSoftSkill(skill)"><i class="fa-solid fa-times"></i></button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Languages Section -->
+    <div class="card section-card">
+      <h2><i class="fa-solid fa-language"></i> Langues</h2>
+      <form [formGroup]="langForm" (ngSubmit)="addLanguage()" class="add-form complex-form">
+        <input type="text" formControlName="flag" placeholder="Icône/Drapeau (ex: 🇺🇸)" class="input-control">
+        <input type="text" formControlName="name" placeholder="Nom de la langue" class="input-control">
+        <input type="text" formControlName="level" placeholder="Niveau" class="input-control">
+        <button type="submit" class="btn btn-primary" [disabled]="langForm.invalid">Ajouter</button>
+      </form>
+      <div class="list-items">
+        @for (lang of spokenLanguages(); track lang.id) {
+          <div class="list-item">
+            <div class="item-info">
+              <span class="item-icon">{{ lang.flag }}</span>
+              <div>
+                <strong>{{ lang.name }}</strong>
+                <span class="item-meta">{{ lang.level }}</span>
+              </div>
+            </div>
+            <button class="btn-icon text-danger" (click)="removeLanguage(lang.id)"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Interests Section -->
+    <div class="card section-card">
+      <h2><i class="fa-solid fa-heart"></i> Centres d'Intérêt</h2>
+      <form [formGroup]="interestForm" (ngSubmit)="addInterest()" class="add-form complex-form">
+        <input type="text" formControlName="icon" placeholder="Classe FontAwesome" class="input-control">
+        <input type="text" formControlName="label" placeholder="Intitulé" class="input-control">
+        <button type="submit" class="btn btn-primary" [disabled]="interestForm.invalid">Ajouter</button>
+      </form>
+      <div class="list-items">
+        @for (interest of interests(); track interest.id) {
+          <div class="list-item">
+            <div class="item-info">
+              <i [ngClass]="interest.icon" class="item-icon fa-fw"></i>
+              <strong>{{ interest.label }}</strong>
+            </div>
+            <button class="btn-icon text-danger" (click)="removeInterest(interest.id)"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
