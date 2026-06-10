@@ -90,45 +90,7 @@
       </div>
     </div>
 
-    @if (proj.contexte || proj.role || proj.duree || (proj.defis?.length ?? 0) > 0) {
-      <div class="pd-details-section">
-        <div class="container">
-          <div class="pd-details-grid">
-            @if (proj.contexte) {
-              <section class="pd-detail-block pd-detail-wide">
-                <h2><i class="fa-solid fa-bullseye"></i> Contexte</h2>
-                <p>{{ proj.contexte }}</p>
-              </section>
-            }
-
-            @if (proj.role) {
-              <section class="pd-detail-block">
-                <h2><i class="fa-solid fa-user-gear"></i> Role</h2>
-                <p>{{ proj.role }}</p>
-              </section>
-            }
-
-            @if (proj.duree) {
-              <section class="pd-detail-block">
-                <h2><i class="fa-regular fa-clock"></i> Duree</h2>
-                <p>{{ proj.duree }}</p>
-              </section>
-            }
-
-            @if ((proj.defis?.length ?? 0) > 0) {
-              <section class="pd-detail-block pd-detail-wide">
-                <h2><i class="fa-solid fa-list-check"></i> Defis techniques</h2>
-                <ul class="pd-defis-list">
-                  @for (defi of proj.defis; track defi) {
-                    <li>{{ defi }}</li>
-                  }
-                </ul>
-              </section>
-            }
-          </div>
-        </div>
-      </div>
-    }
+    
 
   } @else {
 
