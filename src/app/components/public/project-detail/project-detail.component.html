@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  @if (projet; as proj) {
+  @if (projet(); as proj) {
 
     <div class="pd-hero">
       <div class="container">
@@ -23,7 +23,7 @@
               @if (proj.date) {
                 <span class="pd-date">
                   <i class="fa-regular fa-calendar"></i>
-                  {{ proj.date | date:'MMMM yyyy':'':'fr' }}
+                  {{ proj.date | date:'MMMM yyyy' }}
                 </span>
               }
             </div>

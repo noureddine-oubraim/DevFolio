@@ -1,8 +1,7 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { ProjetService } from '../../../services/projet.service';
-import { Projet } from '../../../models/types';
 
 @Component({
   selector: 'app-project-detail',
@@ -16,7 +15,9 @@ export class ProjectDetailComponent {
 
   id = input<string>();
 
-  get projet(): Projet | undefined {
-    return this.projetService.getProjectById(+(this.id() ?? 0));
-  }
+  projet = computed(() => {
+    const projectId = +(this.id() ?? 0);
+    if (!projectId) return undefined;
+    return this.projetService.projects().find(p => p.id === projectId);
+  });
 }
