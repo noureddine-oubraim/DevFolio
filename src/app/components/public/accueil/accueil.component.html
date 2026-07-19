@@ -2,16 +2,15 @@
       <div class="container hero-content">
         <div class="hero-text">
           <span class="badge badge-published" style="margin-bottom: 1rem;">Disponible pour de nouveaux projets</span>
-          <h1>Bonjour, je suis <span style="color: var(--accent-primary)">Chakri Sana</span>.</h1>
+          <h1>Bonjour, je suis <span style="color: var(--accent-primary)">Noureddine Oubraim</span>.</h1>
           <p class="hero-description">
-            Développeur Full-Stack passionné par la création d'applications web performantes, robustes et élégantes. 
-            Je combine rigueur technique et design soigné pour offrir des expériences utilisateur mémorables.
+            Étudiant en ingénierie logicielle (ILISI) motivé, passionné par le développement et la résolution de problèmes.
           </p>
           <div class="hero-actions">
             <a routerLink="/projets" class="btn btn-primary">Voir les Projets</a>
             <a routerLink="/contact" class="btn btn-outline">Me Contacter</a>
             @if (profileService.cvDataUrl) {
-              <a [href]="profileService.cvDataUrl" download="CV_Chakri_Sana.pdf" class="btn btn-outline cv-btn">
+              <a [href]="profileService.cvDataUrl" download="CV_Noureddine_Oubraim.pdf" class="btn btn-outline cv-btn">
                 <i class="fa-solid fa-file-pdf"></i> Télécharger mon CV
               </a>
             }
@@ -31,7 +30,7 @@
         </div>
         
         <div class="skills-grid">
-          @for (skill of competenceService.allSkills.slice(0, 3); track skill.id) {
+          @for (skill of competenceService.allSkills.slice(0, 4); track skill.id) {
             <div class="card skill-card">
               <div class="skill-icon">
                 <i [ngClass]="skill.icone || 'fa-solid fa-code'"></i>
@@ -84,7 +83,7 @@
 
     <section class="experience-section">
       <div class="container">
-        <h2 class="section-title">Expérience Professionnelle</h2>
+        <h2 class="section-title">Formation Académique</h2>
         <div class="timeline">
           @for (exp of experienceService.allExperiences; track exp.id) {
             <div class="timeline-item card">

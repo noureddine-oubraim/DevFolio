@@ -9,105 +9,33 @@
           <div class="method-icon"><i class="fa-regular fa-envelope"></i></div>
           <div class="method-details">
             <span class="method-label">E-MAIL</span>
-            <span class="method-value">ChakriSana&#64;gmail.com</span>
-          </div>
-        </div>
-        <div class="method">
-          <div class="method-icon"><i class="fa-solid fa-phone"></i></div>
-          <div class="method-details">
-            <span class="method-label">TELEPHONE</span>
-            <span class="method-value">06 84 06 86 95</span>
+            <span class="method-value">noureddineoubraim1&#64;gmail.com</span>
           </div>
         </div>
         <div class="method">
           <div class="method-icon"><i class="fa-solid fa-location-dot"></i></div>
           <div class="method-details">
             <span class="method-label">ADRESSE</span>
-            <span class="method-value">Casablanca, Maroc</span>
+            <span class="method-value">Casablanca</span>
           </div>
         </div>
         <div class="method">
           <div class="method-icon"><i class="fa-brands fa-linkedin-in"></i></div>
           <div class="method-details">
             <span class="method-label">LINKEDIN</span>
-            <span class="method-value"><a href="https://www.linkedin.com/in/chakri-sana/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Chakri Sana</a></span>
+            <span class="method-value"><a href="https://www.linkedin.com/in/noureddine-oubraim" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Noureddine Oubraim</a></span>
           </div>
         </div>
         <div class="method">
           <div class="method-icon"><i class="fa-brands fa-github"></i></div>
           <div class="method-details">
             <span class="method-label">GITHUB</span>
-            <span class="method-value"><a href="https://github.com/chakrisana" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">chakrisana</a></span>
+            <span class="method-value"><a href="https://github.com/noureddine-oubraim" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">Noureddine Oubraim</a></span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="contact-form-container card">
-      @if (isSubmitted()) {
-        <div class="success-message">
-          <div class="success-icon"><i class="fa-regular fa-circle-check"></i></div>
-          <h3>Merci, message envoye !</h3>
-          <p>Votre message a ete transmis avec succes. Je vous contacterai tres bientot.</p>
-          <button class="btn btn-outline" (click)="resetForm()">Envoyer un autre message</button>
-        </div>
-      } @else {
-        <form (ngSubmit)="onSubmit()" class="contact-form" novalidate>
-          <div class="form-row">
-            <div class="input-group">
-              <label for="nom">Nom *</label>
-              <input type="text" id="nom" name="nom" class="input-control"
-                     [ngModel]="nom()" (ngModelChange)="nom.set($event)"
-                     [class.invalid]="soumis() && !nomValide">
-              @if (soumis() && !nomValide) {
-                <div class="error-text">
-                  <span>Le nom doit contenir au moins 2 caracteres.</span>
-                </div>
-              }
-            </div>
 
-            <div class="input-group">
-              <label for="email">E-mail *</label>
-              <input type="email" id="email" name="email" class="input-control"
-                     [ngModel]="email()" (ngModelChange)="email.set($event)"
-                     [class.invalid]="soumis() && !emailValide">
-              @if (soumis() && !emailValide) {
-                <div class="error-text">
-                  <span>Veuillez entrer une adresse e-mail valide.</span>
-                </div>
-              }
-            </div>
-          </div>
-
-          <div class="input-group">
-            <label for="sujet">Sujet *</label>
-            <input type="text" id="sujet" name="sujet" class="input-control"
-                   [ngModel]="sujet()" (ngModelChange)="sujet.set($event)"
-                   [class.invalid]="soumis() && !sujetValide">
-            @if (soumis() && !sujetValide) {
-              <div class="error-text">
-                <span>Le sujet doit faire au moins 4 caracteres.</span>
-              </div>
-            }
-          </div>
-
-          <div class="input-group">
-            <label for="message">Message *</label>
-            <textarea id="message" name="message" class="input-control" rows="5"
-                      [ngModel]="message()" (ngModelChange)="message.set($event)"
-                      [class.invalid]="soumis() && !messageValide"></textarea>
-            @if (soumis() && !messageValide) {
-              <div class="error-text">
-                <span>Le message doit faire au moins 10 caracteres.</span>
-              </div>
-            }
-          </div>
-
-          <button type="submit" class="btn btn-primary submit-btn" [disabled]="soumis() && !formValide">
-            Envoyer <i class="fa-regular fa-paper-plane" style="margin-left: 0.5rem;"></i>
-          </button>
-        </form>
-      }
-    </div>
   </div>
 </div>

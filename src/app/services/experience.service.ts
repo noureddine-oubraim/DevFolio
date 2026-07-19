@@ -6,7 +6,7 @@ import { initialExperiences } from '../data/mock-db';
   providedIn: 'root'
 })
 export class ExperienceService {
-  private readonly STORAGE_KEY = 'devfolio_experiences_v3';
+  private readonly STORAGE_KEY = 'devfolio_experiences_v4';
   
   // State signal holding all experiences
   private experiences = signal<Experience[]>(this.loadExperiences());

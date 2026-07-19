@@ -28,11 +28,9 @@ const DEFAULT_PROFILE: ProfileData = {
     { id: 3, flag: '🇺🇸', name: 'Anglais', level: 'Avancé' }
   ],
   interests: [
-    { id: 1, icon: 'fa-solid fa-microphone', label: 'Chant' },
-    { id: 2, icon: 'fa-solid fa-book-open-reader', label: 'Lecture' },
-    { id: 3, icon: 'fa-solid fa-plane-departure', label: 'Voyage' },
-    { id: 4, icon: 'fa-solid fa-palette', label: 'Art & Créativité' },
-    { id: 5, icon: 'fa-solid fa-music', label: 'Musique' }
+    { id: 1, icon: 'fa-solid fa-futbol', label: 'Football' },
+    { id: 2, icon: 'fa-solid fa-person-running', label: 'Course à pied' },
+    { id: 3, icon: 'fa-solid fa-dumbbell', label: 'Musculation' }
   ],
   softSkills: [
     'Organisation', 'Communication', 'Travail d\'équipe', 
@@ -44,7 +42,7 @@ const DEFAULT_PROFILE: ProfileData = {
   providedIn: 'root'
 })
 export class ProfileService {
-  private readonly STORAGE_KEY = 'devfolio_profile_v1';
+  private readonly STORAGE_KEY = 'devfolio_profile_v2';
   
   private state = signal<ProfileData>(this.loadProfile());
 
