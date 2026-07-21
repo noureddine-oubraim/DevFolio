@@ -64,10 +64,12 @@
               </div>
             }
 
-            <a [attr.href]="proj.github || 'https://github.com'" target="_blank" rel="noopener noreferrer"
-               class="btn btn-primary pd-github-btn">
-              <i class="fa-brands fa-github"></i> Voir le code sur GitHub
-            </a>
+            @if (proj.github) {
+              <a [href]="proj.github" target="_blank" rel="noopener noreferrer"
+                 class="btn btn-primary pd-github-btn">
+                <i class="fa-brands fa-github"></i> Voir le code sur GitHub
+              </a>
+            }
           </div>
 
           <!-- Droite : stack technique ─────────── -->

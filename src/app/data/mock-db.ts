@@ -1,6 +1,6 @@
 import { Projet, Competence, Experience, Message } from '../models/types';
 
-export const PROJECTS_DB_VERSION = 5;
+export const PROJECTS_DB_VERSION = 6;
 
 export const initialProjects: Projet[] = [
   {
